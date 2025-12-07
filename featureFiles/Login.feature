@@ -1,7 +1,7 @@
 @sweet @login
 Feature: Login Page Verification
 
-# to check stash
+  # to check stash
 
   #-------------------------------------------------------------------------------------------------------------------
   #Module 1:Login Page UI Verification -Total 12 Scenarios
@@ -56,7 +56,7 @@ Feature: Login Page Verification
       | Login_17   | presence of forgot password link          | Forgot password link  |
       | Login_18   | presence of placeholder in password field | Enter your password   |
 
-     
+
 
 # @navtohomepg @Login_19
 # Scenario: Password input accepts valid existing user
