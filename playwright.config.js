@@ -19,9 +19,9 @@
   export default defineConfig({
     //testDir: './tests',
     testDir,
-     retries: 2,
-    globalSetup: "./global-setup.js",
-    globalTeardown: './global-teardown.js',
+     retries: 3,
+     globalSetup: "./global-setup.js",
+     globalTeardown: './global-teardown.js',
 
     fullyParallel: true,
     forbidOnly: !!process.env.CI,

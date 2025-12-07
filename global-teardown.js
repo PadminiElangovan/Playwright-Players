@@ -12,21 +12,21 @@ export default async () => {
       return;
     }
 
-    // Delete old report folder only
     if (fs.existsSync(REPORT_DIR)) {
       fs.rmSync(REPORT_DIR, { recursive: true, force: true });
       console.log("Old Allure report deleted");
     }
 
-    // Generate fresh report from results (quote paths)
     console.log("Generating Allure report...");
     execSync(`allure generate "${RESULTS_DIR}" --output "${REPORT_DIR}" --clean`, { stdio: "inherit" });
 
-    // Open report on localhost (quote path)
-    console.log("Opening Allure report in browser...");
-    execSync(`allure open "${REPORT_DIR}" --host 127.0.0.1`, { stdio: "inherit" });
+    // Only open locally, skip on CI
+    if (!process.env.CI) {
+      console.log("Opening Allure report in browser...");
+      execSync(`start "" allure open "${REPORT_DIR}" --host 127.0.0.1`, { stdio: "inherit", shell: true });
+    }
 
-    console.log("Allure report successfully generated and opened.");
+    console.log("Allure report successfully generated.");
   } catch (err) {
     console.error("Error generating/opening Allure report:", err);
   }
