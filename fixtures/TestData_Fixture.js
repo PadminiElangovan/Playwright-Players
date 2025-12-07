@@ -1,7 +1,9 @@
 import ExcelJS from 'exceljs';
 import path from 'path';
 
-const EXCEL_PATH = path.join(__dirname, process.env.EXCEL_PATH || 'TestData.xlsx');
+//const EXCEL_PATH = path.join(__dirname, process.env.EXCEL_PATH || 'TestData.xlsx');
+const EXCEL_PATH = path.join(process.cwd(), process.env.EXCEL_PATH || 'TestData/testData.xlsx');
+
 let cachedWorkbook = null;
 
 export const TestData_Fixture = {

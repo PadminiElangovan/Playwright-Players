@@ -5,7 +5,8 @@
   import path from 'path';
   
   
-  dotenv.config({ path: path.resolve(__dirname, 'SweetBalance.env') });
+  //dotenv.config({ path: path.resolve(__dirname, 'SweetBalance.env') });
+  dotenv.config({ path: path.resolve(process.cwd(), '.env') });
   const testDir = defineBddConfig({
     features: ['featureFiles/**.feature'],
     steps: [
@@ -21,7 +22,7 @@
     testDir,
      retries: 3,
      globalSetup: "./global-setup.js",
-     globalTeardown: './global-teardown.js',
+    // globalTeardown: './global-teardown.js',
 
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
