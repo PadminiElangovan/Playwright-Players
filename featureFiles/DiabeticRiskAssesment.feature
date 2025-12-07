@@ -87,6 +87,13 @@ Scenario: Validate Cancel button navigation to home page
   Then User should be returned to the home page
 # ──────────────────────────────────────────────────────────────
 
+@skiplaunch @riskbuttonEnabled
+Scenario: Validate Calculate Risk is enabled 
+  Given User is in diabetes risk analyzer
+  When User enters values in all fields
+  Then User should see Calculate Risk button enabled
+# ──────────────────────────────────────────────────────────────
+
 @skiplaunch @assessmentrisk
 Scenario: Validate assessment result dialog after valid form submission
   Given User is in diabetes risk analyzer
@@ -94,4 +101,3 @@ Scenario: Validate assessment result dialog after valid form submission
   Then User should see Your Diabetes Risk Assessment dialog
 
 # ──────────────────────────────────────────────────────────────
-
