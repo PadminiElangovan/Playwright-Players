@@ -2,6 +2,7 @@
 
 import { Login_Page } from '../pages/Login_Page.js';
 
+
 export const Pages_Fixture = {
   pages: async ({ page }, use, testInfo) => {
     const login = new Login_Page(page);
@@ -28,16 +29,10 @@ export const Pages_Fixture = {
 
         if (loginFree) {
           console.log("Logging in with FREE user (.env)");
-          await login.loginFunction(
-            process.env.FREE_USERNAME,
-            process.env.FREE_PASSWORD
-          );
+          await login.loginFunction(process.env.FREE_USERNAME, process.env.FREE_PASSWORD);
         } else {
           console.log("Logging in with PREMIUM user (.env)");
-          await login.loginFunction(
-            process.env.PREMIUM_USERNAME,
-            process.env.PREMIUM_PASSWORD
-          );
+          await login.loginFunction(process.env.PREMIUM_USERNAME,process.env.PREMIUM_PASSWORD);
         }
 
       } else {
