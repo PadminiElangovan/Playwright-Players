@@ -1,8 +1,8 @@
-@sweet @login @ela1
+@sweet @login 
 Feature: Login Page Verification
 
 
-  Feature 1:Login Page UI Verification -Total 12 Scenarios
+  #Module 1:Login Page UI Verification -Total 12 Scenarios
   @skiplaunch @uiLoginText
   Scenario Outline: Verify <Scenario> is displayed for login
     Given User is on SweetBalance homepage
@@ -35,7 +35,7 @@ Feature: Login Page Verification
 
 
   # #-------------------------------------------------------------------------------------------------------------------
-  # #Feature 2: Login page field and functional Validation
+  # #Module 2: Login page field and functional Validation
   # @skiplogin @loginpg
   # Scenario Outline: Verify <Scenario> for registered email
 
@@ -59,7 +59,7 @@ Feature: Login Page Verification
   #   Then User should be navigated to home page
 
   # # #-------------------------------------------------------------------------------------------------------------------
-  # #   # Feature 3: Complete Profile Form validation for new user
+  # #   # Module 3: Complete Profile Form validation for new user
   # @skiplogin @profileform @data
   # Scenario Outline: Verify <Scenario> for new user email
   #   Given User is on the login page
@@ -76,7 +76,7 @@ Feature: Login Page Verification
   #     | Login_25   | Create Account button is disabled initially | Create Account              |
 
   # # #-------------------------------------------------------------------------------------------------------------------
-  # #   # Feature 4: Profile form verification
+  # #   # Module 4: Profile form verification
 
   # @skiplogin @navtohomepg @data @Login_26
   # Scenario: Create Account button is enabled after valid input
