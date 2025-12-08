@@ -1,11 +1,11 @@
-
-
 import { Login_Page } from '../pages/Login_Page.js';
+import { DiabeticRiskAssesment_Page } from '../pages/DiabeticRiskAssesment_Page.js';
 
 
 export const Pages_Fixture = {
   pages: async ({ page }, use, testInfo) => {
     const login = new Login_Page(page);
+    const diabeticrisk = new DiabeticRiskAssesment_Page(page);
 
     const tags = (testInfo.tags || []).map(t => t.toLowerCase());
     console.log("Scenario:", testInfo.title);
@@ -44,7 +44,7 @@ export const Pages_Fixture = {
        await page.goto('about:blank');
     }
 
-    await use({ login });
+    await use({ login, diabeticrisk });
   },
 };
 

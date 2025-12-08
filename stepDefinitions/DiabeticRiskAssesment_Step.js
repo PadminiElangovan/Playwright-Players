@@ -3,73 +3,134 @@
   import { expect } from '@playwright/test';
 
   const { Given, When, Then } = createBdd(test, { passTags: true });
-  When('User clicks the Check Your Risk button', async ({}) => {
-  // Step: When User clicks the Check Your Risk button
-  // From: featureFiles\DiabeticRiskAssesment.feature:8:3
-});
+  When('User clicks the Check Your Risk button', async ({pages}) => {
 
-Then('User should see {string} displayed in the Diabetes Risk Analyzer', async ({}, arg) => {
-  // Step: Then User should see "Diabetes Risk Analyzer" displayed in the Diabetes Risk Analyzer
-  // From: featureFiles\DiabeticRiskAssesment.feature:9:3
-});
+      await pages.diabeticrisk.clickCheckRisk();
+      
+  });
 
-Then('User should see {string} in the Diabetes Risk Analyzer', async ({}, arg) => {
-  // Step: Then User should see "Cancel button" in the Diabetes Risk Analyzer
-  // From: featureFiles\DiabeticRiskAssesment.feature:21:3
-});
+  Then('User should see {string} displayed in the Diabetes Risk Analyzer', async ({pages}, expected) => {
 
-Then('User should see {string} in {string} field of Diabetes Risk Analyzer', async ({}, arg, arg1) => {
-  // Step: Then User should see "Enter your age (1–150)" in "Age" field of Diabetes Risk Analyzer
-  // From: featureFiles\DiabeticRiskAssesment.feature:37:3
-});
+      if (expected === 'Diabetes Risk Analyzer')
+          await expect(pages.diabeticrisk.riskAnlyHeader).toContainText(expected);
+      else 
+          await expect(pages.diabeticrisk.riskAnlySubTxt).toContainText(expected);
+  });
 
-Then('User should see {string} dropdown contain {string}', async ({}, arg, arg1) => {
-  // Step: Then User should see "Physical Activity" dropdown contain "Active, Moderate, Sedentary"
-  // From: featureFiles\DiabeticRiskAssesment.feature:53:3
-});
+  Then('User should see {string} in the Diabetes Risk Analyzer', async ({pages}, field) => {
 
-Then('User should see {string} numeric stepper {string} control', async ({}, arg, arg1) => {
-  // Step: Then User should see "Age" numeric stepper "increment" control
-  // From: featureFiles\DiabeticRiskAssesment.feature:65:3
-});
+      switch (field.trim()) {
+          case "Cancel button":
+              await expect(pages.diabeticrisk.cancelBtn).toBeVisible(); 
+          break;
+          case "Calculate Risk button":
+              await expect(pages.diabeticrisk.calRiskBtn).toBeVisible(); 
+          break;           
+          case "Family history checkbox":
+              await expect(pages.diabeticrisk.familyHstyChkBox).toBeVisible(); 
+          break;           
+          case "Physical Activity dropdown":
+              await expect(pages.diabeticrisk.pysActLevelDrpdwn).toBeVisible(); 
+          break;          
+          case "Blood Pressure dropdown":
+              await expect(pages.diabeticrisk.bpDrpdwn).toBeVisible(); 
+          break;       
+          case "Diet Quality dropdown":
+              await expect(pages.diabeticrisk.deitQltyDrpdwn).toBeVisible(); 
+          break;
+      }
 
-Then('User should see Calculate Risk button disabled', async ({}) => {
-  // Step: Then User should see Calculate Risk button disabled
-  // From: featureFiles\DiabeticRiskAssesment.feature:80:3
-});
+  });
 
-Given('User is in diabetes risk analyzer', async ({}) => {
-  // Step: Given User is in diabetes risk analyzer
-  // From: featureFiles\DiabeticRiskAssesment.feature:85:3
-});
+  Then('User should see {string} in {string} field of Diabetes Risk Analyzer', async ({pages}, expected, field) => {
+      
+      switch (field.trim()) {
+          case "Age":
+              await expect(pages.diabeticrisk.ageInputBtn).toHaveAttribute('placeholder', expected); 
+          break;
+          case "Weight":
+              await expect(pages.diabeticrisk.weightInputBtn).toHaveAttribute('placeholder', expected); 
+          break;
+          case "Physical Activity":
+              await expect(pages.diabeticrisk.pysActLevelDrpdwn).toContainText(expected); 
+          break;            
+          case "Blood Pressure":
+              await expect(pages.diabeticrisk.bpDrpdwn).toContainText(expected); 
+          break;
+          case "Diet Quality":
+              await expect(pages.diabeticrisk.deitQltyDrpdwn).toContainText(expected); 
+          break;
+      }
+  });
 
-When('User clicks the Cancel button', async ({}) => {
-  // Step: When User clicks the Cancel button
-  // From: featureFiles\DiabeticRiskAssesment.feature:86:3
-});
+  Then('User should see {string} dropdown contain {string}', async ({pages}, field, expected) => {
 
-Then('User should be returned to the home page', async ({}) => {
-  // Step: Then User should be returned to the home page
-  // From: featureFiles\DiabeticRiskAssesment.feature:87:3
-});
+      const options = expected.split(',').map(o => o.trim());
 
-When('User enters values in all fields', async ({}) => {
-  // Step: When User enters values in all fields
-  // From: featureFiles\DiabeticRiskAssesment.feature:93:3
-});
+      let dropdown;
+      switch (field.trim()) {
+          case "Physical Activity":
+              dropdown = pages.diabeticrisk.pysActLevelDrpdwn;
+          break;
+          case "Blood Pressure":
+              dropdown = pages.diabeticrisk.bpDrpdwn;
+          break;
+          case "Diet Quality":
+              dropdown = pages.diabeticrisk.deitQltyDrpdwn;
+          break;
+      }
 
-Then('User should see Calculate Risk button enabled', async ({}) => {
-  // Step: Then User should see Calculate Risk button enabled
-  // From: featureFiles\DiabeticRiskAssesment.feature:94:3
-});
+  for (const option of options) {
+      await expect(dropdown).toContainText(option);
+  }
 
-When('User clicks Calculate Risk button after entering valid values in all fields', async ({}) => {
-  // Step: When User clicks Calculate Risk button after entering valid values in all fields
-  // From: featureFiles\DiabeticRiskAssesment.feature:100:3
-});
+  });
 
-Then('User should see Your Diabetes Risk Assessment dialog', async ({}) => {
-  // Step: Then User should see Your Diabetes Risk Assessment dialog
-  // From: featureFiles\DiabeticRiskAssesment.feature:101:3
-});
+  // Then('User should see {string} numeric stepper {string} control', async ({}, arg, arg1) => {
+  // // Step: Then User should see "Age" numeric stepper "increment" control
+  // // From: featureFiles\DiabeticRiskAssesment.feature:65:3
+  // });
 
+  Then('User should see Calculate Risk button disabled', async ({pages}) => {
+      await expect(pages.diabeticrisk.calRiskBtn).toBeDisabled(); 
+  });
+
+  Given('User is in diabetes risk analyzer', async ({pages}) => {
+      await pages.login.launchApp();
+      await pages.diabeticrisk.clickCheckRisk();
+  });
+
+  When('User clicks the Cancel button', async ({pages}) => {
+      await pages.diabeticrisk.cancelBtn.click();
+  });
+
+  Then('User should be returned to the home page', async ({page}) => {
+      await expect(page).toHaveURL(process.env.BASE_URL);
+  });
+
+  When('User enters values in all fields', async ({pages, testData}) => {
+      await pages.diabeticrisk.inputValues(
+          testData.Age,
+          testData.Weight,
+          testData.PhysicalActivity,
+          testData.BP,
+          testData.Diet);
+  });
+
+  Then('User should see Calculate Risk button enabled', async ({pages}) => {
+      await expect(pages.diabeticrisk.calRiskBtn).toBeEnabled(); 
+  });
+
+  When('User clicks Calculate Risk button after entering valid values in all fields', async ({pages, testData}) => {
+      await pages.diabeticrisk.inputValues(
+          testData.Age,
+          testData.Weight,
+          testData.PhysicalActivity,
+          testData.BP,
+          testData.Diet);
+      await pages.diabeticrisk.calRiskBtn.click(); 
+  });
+
+  Then('User should see {string} dialog', async ({pages}, expected) => {
+      await expect(pages.diabeticrisk.yourAssessmentHeader).toContainText(expected);
+  });

@@ -12,10 +12,22 @@ export class DiabeticRiskAssesment_Page{
         this.bpDrpdwn = page.getByLabel('Blood Pressure');
         this.deitQltyDrpdwn = page.getByLabel('Diet Quality');
         this.cancelBtn = page.getByRole('button', { name: 'Cancel' });
-        this.calRiskBtn = page.getByText('CancelCalculate Risk');
+        this.calRiskBtn = page.getByText('Calculate Risk');
+        this.yourAssessmentHeader = page.getByRole('heading', { name: 'Your Diabetes Risk Assessment' });
 
     }
 
+    async clickCheckRisk() {
+        await this.chkRiskBtn.click();
+    }
 
-   
+    async inputValues(Age, Weight, ActLevel, Bp, DietQlty){
+        await this.ageInputBtn.fill(Age);
+        await this.weightInputBtn.fill(Weight);
+        await this.familyHstyChkBox.check();
+        await this.pysActLevelDrpdwn.selectOption(ActLevel);
+        await this.bpDrpdwn.selectOption(Bp);
+        await this.deitQltyDrpdwn.selectOption(DietQlty);
+    }
+  
 }
