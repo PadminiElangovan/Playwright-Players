@@ -13,10 +13,10 @@ export class Login_Page {
         this.reflectedEmailText = page.locator("//p[@class='text-sm text-gray-500']");
         this.forgotPwdLink = page.getByRole('button', { name: 'Forgot password?' });
         this.homeBtn = page.getByRole('button', { name: 'Home' });
-        this.completeProfileFormModal = page.locator("//form[@class='space-y-4']");
+        this.completeProfileFormModal = page.locator("//h2[@class ='text-2xl font-semibold tracking-tight']");
         this.fullnameTextBox = page.getByRole('textbox', { name: 'Full Name' });
         this.usernameTextBox = page.getByRole('textbox', { name: 'Username' });
-        this.passwordTextBox = page.locator('input[name="password"]');
+        this.passwordTextBoxProfileForm = page.locator('input[name="password"]');
         this.termsAndCondCheckBox = page.locator("//button[@id='terms']");
         this.createAccountBtn = page.locator("//div[@id='root']/div[1]/div/div[2]/form/button");
         this.fullNameError = page.locator("//p[@id=':r7:-form-item-message']");
@@ -36,8 +36,9 @@ export class Login_Page {
         const modalTexts = await this.modal.textContent();
         return modalTexts
     }
+
+
     async getCompleteProfileFormModalText() {
-        await this.completeProfileFormModal.waitFor({ state: 'visible' });
         const modalTexts = await this.completeProfileFormModal.textContent();
         return modalTexts
     }
@@ -58,16 +59,17 @@ export class Login_Page {
         }
     }
     async loginFunctionForNav(username, password) {
+
         await this.emailTextBox.fill(username);
         await this.contWithEmailBtn.click();
         await this.passwordTextBox.fill(password);
         await this.signinBtn.click();
     }
 
-    async fillCompleteProfileFormDetails(fullname,username,password){
+    async fillCompleteProfileFormDetails(fullname, username, password) {
         await this.fullnameTextBox.fill(fullname);
         await this.usernameTextBox.fill(username);
-        await this.passwordTextBox.fill(password);
+        await this.passwordTextBoxProfileForm.fill(password);
         await this.termsAndCondCheckBox.click();
     }
 
@@ -90,19 +92,27 @@ export class Login_Page {
         return placeholderText;
     }
 
-    async getFullNameError(){
+    async getFullNameError() {
         const fullnameError = await this.fullNameError.textContent();
-        console.log("actual error :  " + fullnameError );
+        console.log("actual error :  " + fullnameError);
         return fullnameError
     }
 
-    async getUserNameError(){
+    async getUserNameError() {
         const userError = await this.userNameError.textContent();
-        console.log("actual error :  " + userError );
+        console.log("actual error :  " + userError);
         return userError
     }
 
+    generateUniqueEmail() {
+        this.generatedUniqueEmail = `ela${Date.now()}@gmail.com`;
+        return this.generatedUniqueEmail;
+    }
 
+    generateUniqueUsername() {
+        this.generatedUniqueUsername = `user${Date.now()}${Math.floor(Math.random() * 1000)}`;
+        return this.generatedUniqueUsername;
+    }
 
 
 

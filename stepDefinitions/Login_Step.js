@@ -100,6 +100,12 @@ Then('User should be navigated to home page', async ({ pages }) => {
 
 //Module 3
 
+When('User clicks continue with email button after entering new email', async ({pages}) => {
+  const newUserEmail = pages.login.generateUniqueEmail();
+  await pages.login.fillEmailAndClickCont(newUserEmail);
+  
+});
+
 Then('User should see {string} with {string} for profile form', async ({ pages, testData }, scenario, expected) => {
   switch (scenario.toLowerCase().trim()) {
     case "email input accepts valid new email":
@@ -130,7 +136,8 @@ Then('User should see {string} with {string} for profile form', async ({ pages, 
 
 Given('User is on complete profile form page', async ({ pages, testData }) => {
   await pages.login.loginBtn.click();
-  await pages.login.fillEmailAndClickCont(testData.Email);
+   const newUserEmail = pages.login.generateUniqueEmail();
+  await pages.login.fillEmailAndClickCont(newUserEmail);
 });
 
 When('User checks the Terms & conditions box after filling all fields', async ({ pages }) => {
@@ -171,15 +178,10 @@ Then('User should see {string} in complete profile form', async ({ pages, testDa
 
 });
 
-Given('User is on complete profile form page with new email', async ({ pages }) => {
-  await pages.login.loginBtn.click();
-  const newUserEmail = `ela${Date.now()}@gmail.com`;
-  await pages.login.fillEmailAndClickCont(newUserEmail);
-});
 
 When('User clicks create account button after filling all valid values', async ({ pages, testData }) => {
-  const newUserName = `ela${Date.now()}`;
-  await pages.login.fillCompleteProfileFormDetails(testData.Fullname,newUserName,testData.Password);
+  const newUsername = pages.login.generateUniqueUsername();
+  await pages.login.fillCompleteProfileFormDetails(testData.Fullname,newUsername,testData.Password);
   await pages.login.createAccountBtn.click();
 
 });

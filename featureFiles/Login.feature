@@ -68,13 +68,13 @@ Feature: Login Page Verification Total 31 scenarios
   @skiplogin @profileform
   Scenario Outline: Verify <Scenario> for new user email
     Given User is on the login page
-    When  User clicks continue with email button after entering email
+    When  User clicks continue with email button after entering new email
     Then User should see "<Scenario>" with "<Expected>" for profile form
 
     Examples:
       | TestCaseID | Scenario                                    | Expected                    |
-      | Login_20   | email input accepts valid new email         | Complete your profile form |
-       | Login_21   | Full Name field is visible                  | Full Name                   |
+      | Login_20   | email input accepts valid new email         | Complete your profile form  |
+      | Login_21   | Full Name field is visible                  | Full Name                   |
       | Login_22   | Username field is visible                   | Username                    |
       | Login_23   | Password field is visible                   | Password                    |
       | Login_24   | Terms & Conditions checkbox is visible      | Terms & Conditions checkbox |
@@ -102,17 +102,18 @@ Feature: Login Page Verification Total 31 scenarios
       | Login_28   | Create account form with invalid UserNmae | username error message |
 
 
-@skiplogin  @completeprofileformValid
-Scenario Outline: Verify <Scenario> in complete profile form valid
-  Given User is on complete profile form page with new email
-  When User clicks create account button after filling all valid values
-  Then User should see "<Expected>" in complete profile form
+  @skiplogin  @completeprofileformValid
+  Scenario Outline: Verify <Scenario> in complete profile form valid
+    Given User is on complete profile form page
+    When User clicks create account button after filling all valid values
+    Then User should see "<Expected>" in complete profile form
 
-Examples:
-  | TestCaseID | Scenario | Expected |
-| Login_29   | Create account form  with valid data       | upload blood report            |
-| Login_30   | presence of Upload Blood Report button     | upload blood report            |
-| Login_31   | presence of Step Through Onboarding button | Step Through Onboarding button |
+    Examples:
+      | TestCaseID | Scenario                                   | Expected                       |
+      | Login_29   | Create account form with valid data        | upload blood report            |
+      | Login_30   | presence of Upload Blood Report button     | upload blood report            |
+      | Login_31   | presence of Step Through Onboarding button | Step Through Onboarding button |
+
 
 
 
