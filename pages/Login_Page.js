@@ -6,12 +6,23 @@ export class Login_Page {
         this.modal = page.locator("//div[@id='root']/div[1]/div");
         this.emailTextBox = page.getByRole('textbox', { name: 'Enter email' });
         this.closeBtn = page.locator("//div[@id='root']/div/div/button");
-        this.contWithEmailBtn = page.getByRole('button', { name: 'Continue with email' });
+        this.contWithEmailBtn = page.locator("//button[@type='submit']");
         this.contWithGoogleBtn = page.getByRole('button', { name: 'Continue with Google' });
         this.passwordTextBox = page.getByRole('textbox', { name: 'Enter your password' })
         this.signinBtn = page.getByRole('button', { name: 'Sign in' });
         this.reflectedEmailText = page.locator("//p[@class='text-sm text-gray-500']");
         this.forgotPwdLink = page.getByRole('button', { name: 'Forgot password?' });
+        this.homeBtn = page.getByRole('button', { name: 'Home' });
+        this.completeProfileFormModal = page.locator("//form[@class='space-y-4']");
+        this.fullnameTextBox = page.getByRole('textbox', { name: 'Full Name' });
+        this.usernameTextBox = page.getByRole('textbox', { name: 'Username' });
+        this.passwordTextBox = page.locator('input[name="password"]');
+        this.termsAndCondCheckBox = page.locator("//button[@id='terms']");
+        this.createAccountBtn = page.locator("//div[@id='root']/div[1]/div/div[2]/form/button");
+        this.fullNameError = page.locator("//p[@id=':r7:-form-item-message']");
+        this.userNameError = page.locator("//p[@id=':r8:-form-item-message']");
+        this.uploadBloodReportBtn = page.getByRole('button', { name: 'Upload Blood Report' });
+        this.stepThroOnboarding = page.getByRole('button', { name: 'Step Through Onboarding' });
 
     }
 
@@ -22,10 +33,14 @@ export class Login_Page {
     }
     async getModalText() {
         await this.modal.waitFor({ state: 'visible' });
-        const modalTexts = await this.modal.allTextContents();
-        return modalTexts.join(' ').trim();
+        const modalTexts = await this.modal.textContent();
+        return modalTexts
     }
-
+    async getCompleteProfileFormModalText() {
+        await this.completeProfileFormModal.waitFor({ state: 'visible' });
+        const modalTexts = await this.completeProfileFormModal.textContent();
+        return modalTexts
+    }
     async fillEmailAndClickCont(email) {
 
         await this.emailTextBox.fill(email);
@@ -42,6 +57,20 @@ export class Login_Page {
             await this.signinBtn.click();
         }
     }
+    async loginFunctionForNav(username, password) {
+        await this.emailTextBox.fill(username);
+        await this.contWithEmailBtn.click();
+        await this.passwordTextBox.fill(password);
+        await this.signinBtn.click();
+    }
+
+    async fillCompleteProfileFormDetails(fullname,username,password){
+        await this.fullnameTextBox.fill(fullname);
+        await this.usernameTextBox.fill(username);
+        await this.passwordTextBox.fill(password);
+        await this.termsAndCondCheckBox.click();
+    }
+
 
     async validateErrorMsg() {
         const actualErrorMsg = await this.getModalText();
@@ -60,6 +89,19 @@ export class Login_Page {
         const placeholderText = await this.passwordTextBox.getAttribute('placeholder');
         return placeholderText;
     }
+
+    async getFullNameError(){
+        const fullnameError = await this.fullNameError.textContent();
+        console.log("actual error :  " + fullnameError );
+        return fullnameError
+    }
+
+    async getUserNameError(){
+        const userError = await this.userNameError.textContent();
+        console.log("actual error :  " + userError );
+        return userError
+    }
+
 
 
 

@@ -1,7 +1,6 @@
 @sweet @login
-Feature: Login Page Verification
+Feature: Login Page Verification Total 31 scenarios
 
-  # to check stash
 
   #-------------------------------------------------------------------------------------------------------------------
   #Module 1:Login Page UI Verification -Total 12 Scenarios
@@ -57,56 +56,63 @@ Feature: Login Page Verification
       | Login_18   | presence of placeholder in password field | Enter your password   |
 
 
+  @skiplogin @navtohomepg @Login_19
+  Scenario: Password input accepts valid existing user
+    Given User is on the login page
+    When Registered user clicks sign in after entering password
+    Then User should be navigated to home page
 
-# @navtohomepg @Login_19
-# Scenario: Password input accepts valid existing user
-#   Given User is on the login page
-#   When User Registered user clicks sign in after entering password
-#   Then User should be navigated to home page
+  #-------------------------------------------------------------------------------------------------------------------
+  # Module 3: Complete Profile Form validation for new user - Total 6 Scenarios
+  #-------------------------------------------------------------------------------------------------------------------
+  @skiplogin @profileform
+  Scenario Outline: Verify <Scenario> for new user email
+    Given User is on the login page
+    When  User clicks continue with email button after entering email
+    Then User should see "<Scenario>" with "<Expected>" for profile form
 
-#-------------------------------------------------------------------------------------------------------------------
-# Module 3: Complete Profile Form validation for new user
-#-------------------------------------------------------------------------------------------------------------------
-# @skiplogin @profileform @data
-# Scenario Outline: Verify <Scenario> for new user email
-#   Given User is on the login page
-#   When  User clicks continue with email button after entering email
-#   Then User should see "<Scenario>" with "<Expected>" for profile form
+    Examples:
+      | TestCaseID | Scenario                                    | Expected                    |
+      | Login_20   | email input accepts valid new email         | Complete your profile form |
+       | Login_21   | Full Name field is visible                  | Full Name                   |
+      | Login_22   | Username field is visible                   | Username                    |
+      | Login_23   | Password field is visible                   | Password                    |
+      | Login_24   | Terms & Conditions checkbox is visible      | Terms & Conditions checkbox |
+      | Login_25   | Create Account button is disabled initially | Create Account is disabled  |
 
-#   Examples:
-#     | TestCaseID | Scenario                                    | Expected                    |
-#     | Login_20   | email input accepts valid new email         | Complete your profile  form |
-#     | Login_21   | Full Name field is visible                  | Full Name                   |
-#     | Login_22   | Username field is visible                   | Username                    |
-#     | Login_23   | Password field is visible                   | Password                    |
-#     | Login_24   | Terms & Conditions checkbox is visible      | Terms & Conditions checkbox |
-#     | Login_25   | Create Account button is disabled initially | Create Account              |
+  #-------------------------------------------------------------------------------------------------------------------
+  # Module 4: Profile form verification - Total 6 Scenarios
+  #-------------------------------------------------------------------------------------------------------------------
 
-#-------------------------------------------------------------------------------------------------------------------
-# Module 4: Profile form verification
-#-------------------------------------------------------------------------------------------------------------------
+  @skiplogin @navtohomepg @Login_26
+  Scenario: Create Account button is enabled after valid input
+    Given User is on complete profile form page
+    When User checks the Terms & conditions box after filling all fields
+    Then Create Account button should be enabled
 
-# @skiplogin @navtohomepg @data @Login_26
-# Scenario: Create Account button is enabled after valid input
-#   Given User is on complete profile form page
-#   When User checks the Terms & conditions box after filling all fields
-#   Then Create Account button should be enabled
+  @skiplogin  @completeprofileform
+  Scenario Outline: Verify <Scenario> in complete profile form
+    Given User is on complete profile form page
+    When User clicks create account button after filling all fields
+    Then User should see "<Expected>" in complete profile form
 
-# @skiplogin  @completeprofileform @data
-# Scenario Outline: Verify <Scenario> in complete profile form
-#   Given User is on complete profile form page
-#   When User clicks create account button after filling all fields
-#   Then User should see "<Expected>" in complete profile form
-
-#   Examples:
-#     | TestCaseID | Scenario                                   | Expected                       |
-#     | Login_27   | Create account form with invalid Fullname  | Fullname error message         |
-#     | Login_28   | Create account form with invalid UserNmae  | Username error message         |
-#     | Login_29   | Create account form  with valid data       | upload blood report            |
-#     | Login_30   | presence of Upload Blood Report button     | upload blood report            |
-#     | Login_31   | presence of Step Through Onboarding button | Step Through Onboarding button |
+    Examples:
+      | TestCaseID | Scenario                                  | Expected               |
+      | Login_27   | Create account form with invalid Fullname | fullname error message |
+      | Login_28   | Create account form with invalid UserNmae | username error message |
 
 
+@skiplogin  @completeprofileformValid
+Scenario Outline: Verify <Scenario> in complete profile form valid
+  Given User is on complete profile form page with new email
+  When User clicks create account button after filling all valid values
+  Then User should see "<Expected>" in complete profile form
+
+Examples:
+  | TestCaseID | Scenario | Expected |
+| Login_29   | Create account form  with valid data       | upload blood report            |
+| Login_30   | presence of Upload Blood Report button     | upload blood report            |
+| Login_31   | presence of Step Through Onboarding button | Step Through Onboarding button |
 
 
 
