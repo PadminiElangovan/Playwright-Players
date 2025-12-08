@@ -89,15 +89,102 @@ Then('User should see {string} with {string} for login', async ({ pages, testDat
 });
 
 // Testcase: Login_19
-When('User Registered user clicks sign in after entering password', async ({ pages }) => {
-  // Step: When User Registered user clicks sign in after entering password
-  // From: featureFiles\Login.feature:58:5
+When('Registered user clicks sign in after entering password', async ({ pages }) => {
+  await pages.login.loginFunctionForNav(process.env.FREE_USERNAME, process.env.FREE_PASSWORD);
+
 });
 
 Then('User should be navigated to home page', async ({ pages }) => {
-  // Step: Then User should be navigated to home page
-  // From: featureFiles\Login.feature:59:5
+  await expect(pages.login.homeBtn).toBeVisible();
 });
+
+//Module 3
+
+Then('User should see {string} with {string} for profile form', async ({ pages, testData }, scenario, expected) => {
+  switch (scenario.toLowerCase().trim()) {
+    case "email input accepts valid new email":
+      const actualText = await pages.login.getCompleteProfileFormModalText();
+      console.log("actualText :" + "--->" + actualText);
+      await expect(actualText).toContain(testData.Expected);
+      break;
+    case "Full Name field is visible":
+      await expect(pages.login.fullnameTextBox).toBeVisible();
+      break;
+    case "Username field is visible":
+      await expect(pages.login.usernameTextBox).toBeVisible();
+      break;
+    case "Password field is visible":
+      await expect(pages.login.passwordTextBox).toBeVisible();
+      break;
+    case "Terms & Conditions checkbox is visible":
+      await expect(pages.login.termsAndCondCheckBox).toBeVisible();
+      break;
+    case " Create Account button is disabled initially":
+      await expect(pages.login.createAccountBtn).toBeDisabled();
+      break;
+  }
+
+});
+
+//Module 4
+
+Given('User is on complete profile form page', async ({ pages, testData }) => {
+  await pages.login.loginBtn.click();
+  await pages.login.fillEmailAndClickCont(testData.Email);
+});
+
+When('User checks the Terms & conditions box after filling all fields', async ({ pages }) => {
+  await pages.login.termsAndCondCheckBox.click();
+
+});
+
+Then('Create Account button should be enabled', async ({ pages }) => {
+  await expect(pages.login.createAccountBtn).toBeEnabled();
+});
+
+When('User clicks create account button after filling all fields', async ({ pages, testData }) => {
+  await pages.login.fillCompleteProfileFormDetails(testData.Fullname, testData.Username, testData.Password);
+  await pages.login.createAccountBtn.click();
+
+
+});
+
+Then('User should see {string} in complete profile form', async ({ pages, testData }, expected) => {
+  const expectedError = testData.Expected;
+  switch (expected.toLowerCase().trim()) {
+    case "fullname error message":
+      const actualFullNameError = await pages.login.getFullNameError();
+      await expect(actualFullNameError).toBe(expectedError);
+      break;
+    case "username error message":
+      const actualUserNameError = await pages.login.getUserNameError();
+      await expect(actualUserNameError).toBe(expectedError);
+      break;
+    case "upload blood report":
+      await expect(pages.login.uploadBloodReportBtn).toBeVisible();
+      break;
+    case "Step Through Onboarding button":
+      await expect(pages.login.stepThroOnboarding).toBeVisible();
+      break;
+
+  }
+
+});
+
+Given('User is on complete profile form page with new email', async ({ pages }) => {
+  await pages.login.loginBtn.click();
+  const newUserEmail = `ela${Date.now()}@gmail.com`;
+  await pages.login.fillEmailAndClickCont(newUserEmail);
+});
+
+When('User clicks create account button after filling all valid values', async ({ pages, testData }) => {
+  const newUserName = `ela${Date.now()}`;
+  await pages.login.fillCompleteProfileFormDetails(testData.Fullname,newUserName,testData.Password);
+  await pages.login.createAccountBtn.click();
+
+});
+
+
 
 
 
