@@ -1,16 +1,16 @@
 import { Login_Page } from '../pages/Login_Page.js';
 import { DiabeticRiskAssesment_Page } from '../pages/DiabeticRiskAssesment_Page.js';
 import { Launch_Page } from '../pages/Launch_Page.js'; 
-import { CommonHome_Page } from '../pages/CommonHome_Page.js';
-
+import { PremiumUsrExercise_Page } from '../pages/PremiumUsrExercise_Page.js';
+import {OnboardingWithReport_Page} from '../pages/OnboardingWithReport_Page.js';
 
 export const Pages_Fixture = {
   pages: async ({ page }, use, testInfo) => {
     const login = new Login_Page(page);
     const diabeticrisk = new DiabeticRiskAssesment_Page(page);
     const launch = new Launch_Page(page);
-    const commonhome = new CommonHome_Page(page);
-
+    const pUsrExercise= new PremiumUsrExercise_Page(page);
+    const onbrdwithreport = new OnboardingWithReport_Page(page);
 
     const tags = (testInfo.tags || []).map(t => t.toLowerCase());
     console.log("Scenario:", testInfo.title);
@@ -49,7 +49,8 @@ export const Pages_Fixture = {
        await page.goto('about:blank');
     }
 
-    await use({ login, diabeticrisk, launch, commonhome });
+
+    await use({ login, diabeticrisk,onbrdwithreport, pUsrExercise, launch });
   },
 };
 

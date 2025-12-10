@@ -2,7 +2,6 @@ import { createBdd } from 'playwright-bdd';
 import { test } from '../fixtures/Index_Fixture.js';
 import { expect } from '@playwright/test';
 
-//const {Given, When, Then} = createBdd(test);
 const { Given, When, Then } = createBdd(test, { passTags: true });
 
 Given('User is on SweetBalance homepage', async ({ pages }) => {

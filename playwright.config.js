@@ -25,7 +25,7 @@ const testDir = defineBddConfig({
 export default defineConfig({
   //testDir: './tests',
   testDir,
-  retries: 3,
+  retries: 1,
   globalSetup: "./global-setup.js",
   globalTeardown: './global-teardown.js',
 
