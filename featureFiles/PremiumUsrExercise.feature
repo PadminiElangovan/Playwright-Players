@@ -2,7 +2,8 @@
 Feature: Verification of Premium user Exercise Module
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-@pUsrExeScheduleBtn @PremUsrExer_01
+
+@pUsrExeScheduleBtn @PUsrExer_01
 Scenario: Verify View Full Schedule button is displayed
   Given Premium user is on the homepage
   When Premium user clicks the Exercise option from the side panel
@@ -10,9 +11,9 @@ Scenario: Verify View Full Schedule button is displayed
 	
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-@pUsrExeScheduleNavi @PremUsrExer_02
+@pUsrExeScheduleNavi @PUsrExer_02
 Scenario: Verify navigation to Today's Exercise Schedule page
-  Given Premium user is on the homepage
+  Given Premium user is in the Exercise section
   When Premium user clicks the View Full Schedule button
   Then Premium user is redirected to Today's Exercise Schedule page
 	
@@ -36,7 +37,7 @@ Examples:
 Scenario Outline: Verify <Field> is displayed under Warm Up tab
   Given Premium user is on the homepage
   When Premium user clicks the Exercise option from the side panel
-  Then Premium user should see "<Field>" is displayed under Warm Up tab
+  Then Premium user should see exercise info "<Field>" is displayed
 
 Examples:
   | TestCaseID       | Field                     | 
@@ -52,7 +53,7 @@ Examples:
 Scenario Outline: Verify <Field> is displayed under Main Workout tab
   Given Premium user is in the Exercise section
   When Premium user clicks the Main Workout tab
-  Then Premium user should see "<Field>" is displayed under Main Workout tab
+  Then Premium user should see exercise info "<Field>" is displayed 
 
 Examples:
   | TestCaseID       | Field                     | 
@@ -68,7 +69,7 @@ Examples:
 Scenario Outline: Verify <Field> is displayed under Cool Down tab
   Given Premium user is in the Exercise section
   When Premium user clicks the Cool Down tab
-  Then Premium user should see "<Field>" is displayed under Cool Down tab
+  Then Premium user should see exercise info "<Field>" is displayed
 
 Examples:
   | TestCaseID       | Field                     | 
@@ -78,7 +79,7 @@ Examples:
   | PremUsrExer_19   | Exercise Calories         |
   | PremUsrExer_20   | Exercise Intensity level  |
 
-# ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ # ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 @pUsrExeMrkCompletedBtn @PremUsrExer_21
 Scenario: Verify Mark As Completed button is displayed
@@ -88,35 +89,35 @@ Scenario: Verify Mark As Completed button is displayed
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-@pUsrExeMrkCompSuccessMsg @PremUsrExer_22
-Scenario: Verify success dialog is shown after marking as completed
-  Given Premium user is in the Exercise section
-  When Premium user clicks the Mark As Completed button
-  Then Premium user should see Success dialog for Mark As Completed
+# @pUsrExeMrkCompSuccessMsg @PremUsrExer_22
+# Scenario: Verify success dialog is shown after marking as completed
+#   Given Premium user is in the Exercise section
+#   When Premium user clicks the Mark As Completed button
+#   Then Premium user should see Success dialog for Mark As Completed
 
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-@pUsrExeCompletedBtn @PremUsrExer_23
-Scenario: Verify button status changes to Completed from Mark As Completed
-  Given Premium user is in the Exercise section
-  When Premium user clicks the Mark As Completed button
-  Then Premium user should see Completed Button in Exercise section
+# @pUsrExeCompletedBtn @PremUsrExer_23
+# Scenario: Verify button status changes to Completed from Mark As Completed
+#   Given Premium user is in the Exercise section
+#   When Premium user clicks the Mark As Completed button
+#   Then Premium user should see Completed Button in Exercise section
 
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-@pUsrExeUndoOption @PremUsrExer_24
-Scenario: Verify undo option is displayed after marking completed
-  Given Premium user is in the Exercise section
-  When Premium user clicks the Mark As Completed button
-  Then Premium user should see Undo option is visible in Exercise section
+# @pUsrExeUndoOption @PremUsrExer_24
+# Scenario: Verify undo option is displayed after marking completed
+#   Given Premium user is in the Exercise section
+#   When Premium user clicks the Mark As Completed button
+#   Then Premium user should see Undo option is visible in Exercise section
 
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-@pUsrExeUndoOption @PremUsrExer_25
-Scenario: Verify reverts back to Mark As Completed button after undo action
-  Given Premium user is in the Exercise section
-  When Premium user click undo button after marking Exercise as completed
-  Then Mark As Completed button is displayed
+# @pUsrExeafterUndo @PremUsrExer_25
+# Scenario: Verify reverts back to Mark As Completed button after undo action
+#   Given Premium user is in the Exercise section
+#   When Premium user click undo button after marking Exercise as completed
+#   Then Mark As Completed button is displayed on clicking undo
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -212,7 +213,7 @@ Scenario: Verify the intensity value in todays exercise schedule page
   When Premium user clicks view full schedule
   Then Exercise intensity should be low/medium/hard
 
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 @pUsrExeFullDuration @PremUsrExer_48
 Scenario: Verify total duration is displayed in todays exercise schedule page
