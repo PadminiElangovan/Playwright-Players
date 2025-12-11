@@ -10,4 +10,5 @@ node_modules/
 /allure-report/
 /report/
 /tests/
+testData/testData.xlsx
 
