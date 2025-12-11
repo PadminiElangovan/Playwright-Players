@@ -4,17 +4,13 @@ import { expect } from '@playwright/test';
 
 const { Given, When, Then } = createBdd(test, { passTags: true });
 
-
-
 Given('User is in Home Page', async ({ pages }) => {
   console.log("User is in Home Page");
 });
 
-
 When('User clicks Blood Glucose', async ({ pages }) => {
   await pages.trackGlucose.navigateToTrackGlucoseScreen();
 });
-
 
 Then('User should see {string} Heading for {string}', async ({ pages }, text, Scenario) => {
   let actual;
@@ -31,10 +27,6 @@ Then('User should see {string} Heading for {string}', async ({ pages }, text, Sc
   await expect(actual.trim()).toBe(text);
 
 });
-
-//  Then('User should see the following fields:', async ({}, dataTable) => {
-
-//  });
 
 Then('User should see text field for blood glucose', async ({ pages }) => {
   await expect(pages.trackGlucose.TrackGlucoseInputField).toBeVisible();
@@ -144,8 +136,6 @@ Then('User should see date picker opened', async ({ pages }) => {
   await expect(pages.trackGlucose.calendar).toBeVisible();
 });
 
-
-
 Then('User should see today\'s date highlighted', async ({ pages }) => {
   const today = new Date().getDate();
   const highlightedDate = await pages.trackGlucose.currentDateBtn.textContent();
@@ -189,12 +179,10 @@ Then('User should see transition details highlights', async ({ pages, testData }
   await expect(locator).toHaveText(testData.Transition, { ignoreCase: true });
 });
 
-
 When('User clicks record reading button after entering {string} valid details', async ({ pages, testData }, reading) => {
 
   console.log('Blood glucose value from excel:', testData.BloodGlucoseLevel);
   await pages.trackGlucose.enterTrackGlucoseLevel(testData.BloodGlucoseLevel);
-
   await pages.trackGlucose.selectReadingType(testData.ReadingType);
   await pages.trackGlucose.clickRecordReading();
 });
@@ -202,7 +190,6 @@ When('User clicks record reading button after entering {string} valid details', 
 Then('User should see {string}', async ({ pages }, expectedMessage) => {
   const actualMessage = await pages.trackGlucose.getSucessMessage();
   expect(actualMessage.trim()).toBe(expectedMessage);
-
 
 });
 
@@ -212,8 +199,6 @@ When('User enters {string} in the blood glucose field', async ({ pages, testData
 });
 
 Then('User should see the blood glucose field remain blank', async ({ pages }) => {
-
-  const inputField = pages.trackGlucose.getTrackGlucoseInputField();
   await expect(pages.trackGlucose.TrackGlucoseInputField).toHaveValue('');
 
 });
