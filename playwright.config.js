@@ -13,7 +13,7 @@ console.log(`[Config] Using .env file at: ${envPath}`);
 
 
 const testDir = defineBddConfig({
-  features: ['featureFiles/**.feature'],
+  features: ['featureFiles/**/*.feature'],
   steps: [
 
     'stepDefinitions/**.js',
@@ -35,6 +35,7 @@ export default defineConfig({
   //retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
+  
 
   reporter: [['html'],
   ['allure-playwright', { outputFolder: 'Allure-Report' }]
