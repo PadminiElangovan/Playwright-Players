@@ -1,4 +1,4 @@
-// Generated from: featureFiles/Login/Login.feature
+// Generated from: featureFiles\Login\Login.feature
 import { test } from "../../../fixtures/Index_Fixture.js";
 
 test.describe('Login Page Verification Total 31 scenarios', () => {
@@ -219,7 +219,7 @@ test.describe('Login Page Verification Total 31 scenarios', () => {
 
 test.use({
   $test: [({}, use) => use(test), { scope: 'test', box: true }],
-  $uri: [({}, use) => use('featureFiles/Login/Login.feature'), { scope: 'test', box: true }],
+  $uri: [({}, use) => use('featureFiles\\Login\\Login.feature'), { scope: 'test', box: true }],
   $bddFileData: [({}, use) => use(bddFileData), { scope: "test", box: true }],
 });
 
