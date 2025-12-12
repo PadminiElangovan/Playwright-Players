@@ -1,4 +1,4 @@
-@skiplogin @launch 
+@skiplaunch @launch 
 Feature: Launch Page Validations
 
 Scenario: Validate the presence of App Name on the home page
@@ -41,28 +41,64 @@ Scenario: Verify the Smart Insights card is visible
   When User enters the SweetBalance url
   Then User should see a card with title "Smart Insights"
 
-Scenario: Validate description in Health Tracking feature card
+Scenario: Validate Health Tracking description - monitor glucose levels text
   Given User launches the browser
   When User enters the SweetBalance url
   Then User should see the text "Monitor glucose levels, medication, and vital statistics"
+
+Scenario: Validate Health Tracking description - easy logging text
+  Given User launches the browser
+  When User enters the SweetBalance url
   Then User should see the text "Easy logging of daily readings"
+
+Scenario: Validate Health Tracking description - visualize trends text
+  Given User launches the browser
+  When User enters the SweetBalance url
   Then User should see the text "Visualize trends over time"
+
+Scenario: Validate Health Tracking description - personalized targets text
+  Given User launches the browser
+  When User enters the SweetBalance url
   Then User should see the text "Set personalized targets"
 
-Scenario: Validate description in Nutrition & Exercise card
+Scenario: Validate Nutrition & Exercise description - balance diet and activity text
   Given User launches the browser
   When User enters the SweetBalance url
   Then User should see the text "Balance diet and physical activity for optimal control"
+
+Scenario: Validate Nutrition & Exercise description - carb counting tools text
+  Given User launches the browser
+  When User enters the SweetBalance url
   Then User should see the text "Carb counting tools"
+
+Scenario: Validate Nutrition & Exercise description - customized exercise plans text
+  Given User launches the browser
+  When User enters the SweetBalance url
   Then User should see the text "Customized exercise plans"
+
+Scenario: Validate Nutrition & Exercise description - meal suggestions text
+  Given User launches the browser
+  When User enters the SweetBalance url
   Then User should see the text "Meal suggestions based on readings"
 
-Scenario: Validate description in Smart Insights card
+Scenario: Validate Smart Insights description - personalized guidance text
   Given User launches the browser
   When User enters the SweetBalance url
   Then User should see the text "Get personalized guidance based on your data"
+
+Scenario: Validate Smart Insights description - pattern detection algorithms text
+  Given User launches the browser
+  When User enters the SweetBalance url
   Then User should see the text "Pattern detection algorithms"
+
+Scenario: Validate Smart Insights description - early warning notifications text
+  Given User launches the browser
+  When User enters the SweetBalance url
   Then User should see the text "Early warning notifications"
+
+Scenario: Validate Smart Insights description - actionable recommendations text
+  Given User launches the browser
+  When User enters the SweetBalance url
   Then User should see the text "Actionable recommendations"
 
 Scenario: Validate icon in Health tracking feature card
@@ -105,12 +141,20 @@ Scenario: Validate presence of 5 yellow stars above "Join our community of succe
   When User enters the SweetBalance url
   Then User should see 5 yellow stars above "Join our community of successful members" text
 
-Scenario: Validate star ratings for all testimonials
+Scenario: Validate star rating for testimonial by James D.
   Given User launches the browser
   When User enters the SweetBalance url
   Then User should see 5 stars for "James D."
-  And User should see 5 stars for "Maria L."
-  And User should see 5 stars for "Robert T."
+
+Scenario: Validate star rating for testimonial by Maria L.
+  Given User launches the browser
+  When User enters the SweetBalance url
+  Then User should see 5 stars for "Maria L."
+
+Scenario: Validate star rating for testimonial by Robert T.
+  Given User launches the browser
+  When User enters the SweetBalance url
+  Then User should see 5 stars for "Robert T."
 
 Scenario: Validate presence of bottom section heading in home page
   Given User launches the browser
@@ -156,6 +200,3 @@ Scenario: Homepage maintains accessibility standards
   Given User is in browser
   When User enters the SweetBalance url
   Then All major sections are accessible with appropriate labels and alt texts
-
-
-
