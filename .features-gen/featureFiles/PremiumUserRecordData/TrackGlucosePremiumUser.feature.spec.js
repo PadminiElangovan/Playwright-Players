@@ -1,4 +1,4 @@
-// Generated from: featureFiles/PremiumUserRecordData/TrackGlucosePremiumUser.feature
+// Generated from: featureFiles\PremiumUserRecordData\TrackGlucosePremiumUser.feature
 import { test } from "../../../fixtures/Index_Fixture.js";
 
 test.describe('Validating Track Glucose functionality in the premium user record data', () => {
@@ -230,7 +230,7 @@ test.describe('Validating Track Glucose functionality in the premium user record
 
 test.use({
   $test: [({}, use) => use(test), { scope: 'test', box: true }],
-  $uri: [({}, use) => use('featureFiles/PremiumUserRecordData/TrackGlucosePremiumUser.feature'), { scope: 'test', box: true }],
+  $uri: [({}, use) => use('featureFiles\\PremiumUserRecordData\\TrackGlucosePremiumUser.feature'), { scope: 'test', box: true }],
   $bddFileData: [({}, use) => use(bddFileData), { scope: "test", box: true }],
 });
 
