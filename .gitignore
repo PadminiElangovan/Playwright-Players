@@ -11,4 +11,4 @@ node_modules/
 /report/
 /tests/
 testData/testData.xlsx
-
+/.vscode/
