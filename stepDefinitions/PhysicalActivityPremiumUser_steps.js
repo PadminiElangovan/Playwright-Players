@@ -125,3 +125,47 @@ Then('User should see the following intensity options', async ({ pages }, dataTa
 Then('User should see save activity button in physical activity', async ({ pages }) => {
     await expect(pages.physicalActivity.SaveActivityButton).toBeVisible();
 });
+
+Given('User is on the Physical Activity screen', async ({ pages }) => {
+    console.log("User is on the Physical Activity screen");
+});
+
+When('User clicks record save activity button after entering {string}', async ({ pages, testData }, scenario) => {
+   console.log("ActivityType:", testData.ActivityType, "Duration:", testData.Duration, "Intensity:", testData.Intensity);
+    await pages.physicalActivity.selectActivityType(testData.ActivityType);
+    await pages.physicalActivity.enterDuration(testData.Duration)
+    await pages.physicalActivity.clickDurationDropdown();
+    await pages.physicalActivity.selectDurationDropdown(testData.DurationUnit)
+    await pages.physicalActivity.selectIntensity(testData.Intensity);
+    await pages.physicalActivity.clickSaveActivityButton();
+});
+
+Then('User should see {string} in physical activity form', async ({ pages }, expectedMessage) => {
+    const actualMessage = await pages.physicalActivity.physicalActivtySucessMesg();
+    expect(actualMessage.trim()).toBe(expectedMessage);
+
+});
+
+When('User enters an {string} value in the duration text field', async ({ pages, testData }, Scenario) => {
+    await pages.physicalActivity.enterDuration(testData.Duration);
+});
+
+Then('User should see the field remain blank', async ({ pages }) => {
+    await expect(pages.physicalActivity.DurationInputField).toHaveValue('');
+});
+
+When('User clicks the date picker', async ({ pages }) => {
+    await pages.physicalActivity.clickDatePicker();
+});
+
+Then('User should see the date calendar', async ({ pages }) => {
+    await expect(pages.physicalActivity.calendar).toBeVisible();
+});
+
+Then('User should see the previous button in the date picker', async ({ pages }) => {
+    await expect(pages.physicalActivity.previousBtnInCalendar).toBeVisible();
+});
+
+Then('User should see the next button in the date picker', async ({ pages }) => {
+    await expect(pages.physicalActivity.nextBtnInCalendar).toBeVisible();
+});

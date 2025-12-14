@@ -9,7 +9,7 @@ export class PhysicalActivityPremiumUser_page {
         this.DurationText = page.getByText('Duration');
         this.DateText = page.getByText('Date', { exact: true });
         this.IntensityText = page.getByText('Intensity');
-        this.ActivityTypeDropdown = page.getByLabel('Activity Type')
+        this.ActivityTypeDropdown = page.locator('#activityType');
         this.ActivityTypeDropdownOptions = this.ActivityTypeDropdown.locator('option');
         this.DurationInputField = page.getByRole('spinbutton', { name: 'Duration' });
         this.DurationDropdown = page.locator('select[name="durationUnit"]');
@@ -18,11 +18,11 @@ export class PhysicalActivityPremiumUser_page {
         this.LightIntensity = page.getByRole('button', { name: 'Light' });
         this.ModerateIntensity = page.getByRole('button', { name: 'Moderate' });
         this.VigorousIntensity = page.getByRole('button', { name: 'Vigorous' });
+        this.calendar = page.locator('.rdp.p-3');
         this.previousBtnInCalendar = page.getByRole('button', { name: 'Go to previous month' });
         this.nextBtnInCalendar = page.getByRole('button', { name: 'Go to next month' });
         this.SaveActivityButton = page.getByRole('button', { name: 'Save Activity' });
-        this.sucessMessage = page.getByText('Your activity has been saved.');
-
+        this.sucessMessage = page.locator('div.text-sm.opacity-90');
 
     }
 
@@ -62,11 +62,47 @@ export class PhysicalActivityPremiumUser_page {
         await this.DatePicker.click();
 
     }
+
     async physicalActivtySucessMesg() {
-        await this.sucessMessage.textContent();
+        return await this.sucessMessage.textContent();
     }
 
+    async selectActivityType(option) {
+        await this.ActivityTypeDropdown.waitFor({ state: 'visible' });
+        await this.ActivityTypeDropdown.selectOption({ label: option });
+    }
 
+    async enterDuration(duration) {
+        await this.DurationInputField.click();
+        await this.DurationInputField.press(process.platform === 'darwin' ? 'Meta+A' : 'Control+A');
+        await this.DurationInputField.press('Backspace');
+        await this.DurationInputField.type(String(duration));
+    }
 
+    async selectDurationDropdown(option) {
+        await this.DurationDropdown.selectOption(option);
+    }
+
+    async clickSaveActivityButton() {
+        await this.SaveActivityButton.click();
+    }
+
+    async selectIntensity(type) {
+        switch (type) {
+            case 'Light':
+                await this.LightIntensity.click();
+                break;
+            case 'Moderate':
+                await this.ModerateIntensity.click();
+                break;
+            case 'Vigorous':
+                await this.VigorousIntensity.click();
+                break;
+            default:
+                throw new Error(`Unknown Intensity type: ${Intensity}`);
+        }
+    }
 
 }
+
+
