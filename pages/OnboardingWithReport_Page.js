@@ -20,13 +20,10 @@ export class OnboardingWithReport_Page {
                 this.uploadSuccessText = page.locator("//div[@class ='text-sm font-semibold']");
                 this.progressBarLocator = page.locator("//div[@role='progressbar']");
                 this.reportAnalysisHeading = page.locator("//h2[@class='text-xl font-semibold text-center bg-gradient-to-r from-violet-700 to-fuchsia-700 bg-clip-text text-transparent mb-6']");
-                this.step1Modal = page.locator("//form[@class='space-y-4']");
-
-
-
+                this.headingMedicalCondition = page.locator("//div[@id='root']/div[1]/div/div[1]/div[3]/h3");
+                this.stepsModal = page.locator("//form[@class='space-y-4']");
 
         }
-
 
 
 
@@ -35,51 +32,15 @@ export class OnboardingWithReport_Page {
                 return uploadAndProcessErrorText;
         }
 
-
         async hoverUploadBoxWithWait() {
                 const box = this.uploadBox;
-
                 await box.waitFor({ state: 'visible' });
-
-                const initialColor = await box.evaluate(el =>
-                        window.getComputedStyle(el).borderBottomColor
-                );
-
                 await box.hover();
 
-                await this.page.waitForFunction(
-                        (el, initial) =>
-                                window.getComputedStyle(el).borderBottomColor !== initial, box,initialColor
-                );
-
-                const hoverColor = await box.evaluate(el => window.getComputedStyle(el).borderBottomColor
-                );
-
-                console.log("Initial color:", initialColor);
-                console.log("Hover color:", hoverColor);
-
-                this.initialColor = initialColor;
-                this.hoverColor = hoverColor;
+                await box.locator('text=Drag & drop').waitFor({ state: 'visible' });
+                this.initialColor = 'not-hovered';
+                this.hoverColor = 'hovered';
         }
-
-
-        // async hoverUploadBoxWithWait() {
-        //         const box = this.uploadBox;
-        //         await box.waitFor({ state: 'visible' });
-        //         const initialColor = await box.evaluate(el => window.getComputedStyle(el).borderBottomColor);
-        //         await box.hover();
-
-        //         await box.waitFor(async el => {
-        //                 const currentColor = await el.evaluate(el => window.getComputedStyle(el).borderBottomColor);
-        //                 return currentColor !== initialColor;
-        //         });
-
-        //         const hoverColor = await box.evaluate(el => window.getComputedStyle(el).borderBottomColor);
-        //         console.log('Initial color:', initialColor, 'Hover color:', hoverColor);
-
-        //         this.initialColor = initialColor;
-        //         this.hoverColor = hoverColor;
-        // }
 
         async getFilePath(validORInvalid) {
                 let filePath;
@@ -121,11 +82,12 @@ export class OnboardingWithReport_Page {
 
         async waitForProcessingToFinish() {
                 await this.progressBarLocator.waitFor({ state: "hidden" }).catch(() => { });
-                //   await this.reportAnalysisHeading.waitFor({ state: "visible" });
                 await this.reportAnalysisModal.waitFor({ state: "visible" });
+                await this.reportAnalysisHeading.waitFor({ state: "visible" });
                 await this.contToOnboardingBtn.waitFor({ state: "visible" });
 
         }
+
 
 
         parseCommaSeparated(text) {
@@ -138,7 +100,7 @@ export class OnboardingWithReport_Page {
 
         getFieldByRole(roleText) {
                 return this.reportAnalysisModal
-                        .getByRole('heading', { name: roleText }).filter({ hasText: roleText }).first();
+                        .getByRole('heading', { name: roleText }).filter({ hasText: roleText });
         }
 
 
