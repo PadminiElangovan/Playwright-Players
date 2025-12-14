@@ -1,5 +1,5 @@
 @sweet @withreportmodal @skiplogin
-Feature: Onboarding scenarios with blood report - Modal Total 15 Scenarios
+Feature: Onboarding scenarios with blood report - Modal Total 16 Scenarios
 
     Background: User successfully completed profile setup
         Given User is on complete profile form page
@@ -65,9 +65,14 @@ Feature: Onboarding scenarios with blood report - Modal Total 15 Scenarios
         Then User should see the following sections:
             | Blood Test Results   |
             | Complete Blood Count |
-            | Medical Conditions   |
             | Abnormal Values      |
             | Recommendations      |
+
+    @reportanalysisMedicalfield @WithReport_10
+    Scenario: Upload report and verify Medical Conditions section is visible
+        Given User is on blood report modal
+        When user uploads "Valid pdf file" file
+        Then User should see "Medical Conditions" section
 
     #-------------------------------------------------------------------------------------------------------------------
     #Module 3:Onboarding Form Validation (Step 1 0f 5) Total 5 Scenarios
