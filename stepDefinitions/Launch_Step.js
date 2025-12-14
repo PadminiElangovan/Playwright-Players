@@ -5,17 +5,12 @@ import { expect } from '@playwright/test';
 const { Given, When, Then } = createBdd(test, { passTags: true });
 
 Given('User launches the browser', async ({ pages }) => {
-  
-});
-
-When('User enters the SweetBalance url', async ({ pages }) => {
-  await pages.launch.openHome();
+  await pages.launch.openHome(); 
 });
 
 Then('User should see app name on the top left', async ({ pages }) => {
   await expect(pages.launch.appName).toBeVisible();
 });
-
 
 Then('User should see text {string}', async ({ pages }, expectedText) => {
   await expect(
@@ -82,10 +77,11 @@ Then('User should see {string} text is visible above testimonial section',async 
   }
 );
 
-Then('User should see {int} yellow stars above {string} text', async ({ pages }, count, headerText) => {
-    await expect(
-      pages.launch.getStarsAboveHeader()
-    ).toHaveCount(count);
+Then(
+  'User should see {int} yellow stars above {string} text',
+  async ({ pages }, count, headerText) => {
+    await expect(pages.launch.text(headerText, { exact: true })).toBeVisible();
+    await expect(pages.launch.getStarsAboveHeader()).toHaveCount(count);
   }
 );
 
@@ -102,10 +98,6 @@ Then('User should see a section with heading {string}', async ({ pages }, headin
   }
 );
 
-Given('User goes to the SweetBalance homepage', async ({ pages }) => {
-  await pages.launch.openHome();
-});
-
 When('User click the {string} button', async ({ pages }, buttonText) => {
     const pattern = new RegExp(buttonText, 'i');  //regexp makes the text case insentitive
     await pages.launch
@@ -114,9 +106,6 @@ When('User click the {string} button', async ({ pages }, buttonText) => {
   }
 );
 
-When('User look at the top right corner', async () => {
-
-});
 
 Then('User should see a link labeled {string}', async ({ pages }, linkText) => {
     const pattern = new RegExp(linkText, 'i');
@@ -145,10 +134,6 @@ Then('User should be redirected to the assessment modal dialog', async ({ pages 
     await expect(dialog).toBeVisible();
   }
 );
-
-Given('User is in browser', async () => {
- 
-});
 
 Then('Page should be fully loaded within 3 seconds', async ({ pages }) => {
     const loadDuration = await pages.launch.getPageLoadDuration();
