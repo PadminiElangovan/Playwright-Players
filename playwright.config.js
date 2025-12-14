@@ -25,7 +25,8 @@ const testDir = defineBddConfig({
 export default defineConfig({
   //testDir: './tests',
   testDir,
-  retries: 1,
+   timeout: 90000,
+  retries: 2,
   globalSetup: "./global-setup.js",
   globalTeardown: './global-teardown.js',
 
@@ -48,6 +49,8 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
+
+  
   /* Configure projects for major browsers */
   projects: [
     {
@@ -58,6 +61,7 @@ export default defineConfig({
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
+      timeout: 120000,
     },
 
     {

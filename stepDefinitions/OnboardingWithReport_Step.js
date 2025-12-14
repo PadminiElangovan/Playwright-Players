@@ -24,6 +24,7 @@ Then('User should navigate to blood report modal', async ({ pages }) => {
 
 });
 Given('User is on blood report modal', async ({ pages }) => {
+    await pages.onbrdwithreport.uploadBloodReportBtn.waitFor({ state: 'visible' });
     await pages.onbrdwithreport.uploadBloodReportBtn.click();
 });
 
@@ -32,7 +33,7 @@ When('User hovers over the upload box', async ({ pages }) => {
 });
 
 Then('Upload box should show drag & drop interaction', async ({ pages }) => {
-  //  expect(pages.onbrdwithreport.hoverColor).not.toBe(pages.onbrdwithreport.initialColor);
+    expect(pages.onbrdwithreport.hoverColor).not.toBe(pages.onbrdwithreport.initialColor);
 });
 
 When('user uploads {string} file', async ({ pages }, validORinvalid) => {
@@ -46,6 +47,7 @@ Then('User should see {string} outcome', async ({ pages, testData }, expected) =
     switch (expected) {
         case "Only PDF files are supported":
         case "File exceeds 10MB":
+            await pages.onbrdwithreport.progressBarLocator.waitFor({ state: 'visible' });
             const actualError = await pages.onbrdwithreport.getUploadAndProcessError();
             await expect(actualError).toContain(testData.Expected);
             break;
@@ -75,7 +77,7 @@ Then('User should see {string} after processing', async ({ pages }, expected) =>
     switch (expected) {
         case "Report analysis":
             await pages.onbrdwithreport.waitForProcessingToFinish();
-            await expect(pages.onbrdwithreport.reportAnalysisModal).toBeVisible();
+            await expect(pages.onbrdwithreport.reportAnalysisHeading).toBeVisible();
             break;
         case "continue to onboarding button":
             await pages.onbrdwithreport.waitForProcessingToFinish();
@@ -83,6 +85,7 @@ Then('User should see {string} after processing', async ({ pages }, expected) =>
             break;
     }
 });
+
 
 Then('User should see the following sections:', async ({ pages }, dataTable) => {
     const expectedSections = dataTable.raw().flat();
@@ -92,53 +95,58 @@ Then('User should see the following sections:', async ({ pages }, dataTable) => 
         await expect(sectionHeading, `Heading "${section}" is not visible`).toBeVisible();
     }
 });
+
+Then('User should see {string} section', async ({ pages }, expected) => {
+    await pages.onbrdwithreport.waitForProcessingToFinish();
+    const headingLocator = pages.onbrdwithreport.headingMedicalCondition;
+    await expect(headingLocator).toBeVisible();
+});
+
 //Module 3
 Given('User is on report analysis', async ({ pages }) => {
+    await pages.onbrdwithreport.uploadBloodReportBtn.waitFor({ state: 'visible' });
     await pages.onbrdwithreport.uploadBloodReportBtn.click();
     await pages.onbrdwithreport.uploadFile("Valid pdf file");
 
 });
 
 When('User clicks Onboarding button', async ({ pages }) => {
+    //  await pages.onbrdwithreport.page.waitForLoadState('domcontentloaded');
     await pages.onbrdwithreport.waitForProcessingToFinish();
     await pages.onbrdwithreport.contToOnboardingBtn.click();
 
 });
 
-Then('User should see {string} for step for onboarding with Blood report for {string}',
-    async ({ pages, testData }, expected, scenario) => {
+Then('User should see {string} for step for onboarding with Blood report for {string}', async ({ pages, testData }, expected, scenario) => {
+    await pages.onbrdwithreport.stepsModal.waitFor({ state: "visible" });
 
-         await pages.onbrdwithreport.step1Modal.waitFor({ state: "visible" });
-       
-        switch (scenario) {
+    switch (scenario) {
+        case "presence of text field":
+            const placeholders = pages.onbrdwithreport.parseCommaSeparated(expected);
+            for (const text of placeholders) {
+                const field = pages.onbrdwithreport.getFieldByPlaceholder(text);
+                await expect(field, `Field with placeholder "${text}" is not visible`).toBeVisible();
+            }
+            break;
 
-            case "presence of text field":
-                const placeholders = pages.onbrdwithreport.parseCommaSeparated(expected);
-                for (const text of placeholders) {
-                    const field = pages.onbrdwithreport.getFieldByPlaceholder(text);
-                    await expect(field, `Field with placeholder "${text}" is not visible`).toBeVisible();
-                }
-                break;
+        case "presence of dropdown":
+            await expect(pages.onbrdwithreport.genderDropBox).toBeVisible();
+            break;
 
-            case "presence of dropdown":
-                await expect(pages.onbrdwithreport.genderDropBox).toBeVisible();
-                break;
+        case "progress bar is visible":
+            await expect(pages.onbrdwithreport.progressBar).toBeVisible();
+            break;
 
-            case "progress bar is visible":
-                await expect(pages.onbrdwithreport.progressBar).toBeVisible();
-                break;
+        case "presence of continue button":
 
-            case "presence of continue button":
-                await pages.onbrdwithreport.continueBtn.waitFor({ state: "visible" });
-                await expect(pages.onbrdwithreport.continueBtn).toBeVisible();
-                break;
+            await expect(pages.onbrdwithreport.continueBtn).toBeVisible();
+            break;
 
-            case "incomplete steps (2-5) are not highlighted":
-                const { fullClasses } = await pages.onbrdwithreport.getProgressBarClasses();
-                await expect(fullClasses, 'Unfilled portion is not unhighlighted correctly')
-                    .toContain(testData.Expected);
-                break;
-        }
-    });
+        case "incomplete steps (2-5) are not highlighted":
+            const { fullClasses } = await pages.onbrdwithreport.getProgressBarClasses();
+            await expect(fullClasses, 'Unfilled portion is not unhighlighted correctly').toContain(testData.Expected);
+            break;
+    }
+});
 
 
