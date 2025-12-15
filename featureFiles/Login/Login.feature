@@ -1,7 +1,6 @@
 @sweet @login
 Feature: Login Page Verification Total 31 scenarios
 
-
   #-------------------------------------------------------------------------------------------------------------------
   #Module 1:Login Page UI Verification -Total 12 Scenarios
   #-------------------------------------------------------------------------------------------------------------------
@@ -104,13 +103,13 @@ Feature: Login Page Verification Total 31 scenarios
 
   @skiplogin  @completeprofileformValid
   Scenario Outline: Verify <Scenario> in complete profile form valid
-     Given User is on complete profile form page
+    Given User is on complete profile form page
     When User clicks create account button after filling all valid values
     Then User should see "<Expected>" in complete profile form
 
     Examples:
       | TestCaseID | Scenario                                   | Expected                       |
-      | Login_29   | Create account form with valid data       | upload blood report            |
+      | Login_29   | Create account form with valid data        | upload blood report            |
       | Login_30   | presence of Upload Blood Report button     | upload blood report            |
       | Login_31   | presence of Step Through Onboarding button | Step Through Onboarding button |
 

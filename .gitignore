@@ -10,5 +10,5 @@ node_modules/
 /allure-report/
 /report/
 /tests/
-/testData/testData.xlsx
+/testData/testData.xlsx/
 /.vscode/
