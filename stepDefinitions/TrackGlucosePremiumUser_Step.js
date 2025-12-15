@@ -187,7 +187,7 @@ When('User clicks record reading button after entering {string} valid details', 
   await pages.trackGlucose.clickRecordReading();
 });
 
-Then('User should see {string}', async ({ pages }, expectedMessage) => {
+Then('User should see {string} in track glucose form', async ({ pages }, expectedMessage) => {
   const actualMessage = await pages.trackGlucose.getSucessMessage();
   expect(actualMessage.trim()).toBe(expectedMessage);
 

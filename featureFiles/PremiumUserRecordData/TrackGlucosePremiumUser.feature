@@ -107,7 +107,7 @@ Scenario Outline: Verify transition details for <Scenario> are highlighted
 Scenario Outline: Verify blood glucose <Scenario> with valid input
     Given User is on the Blood Glucose screen
     When User clicks record reading button after entering "<Scenario>" valid details
-    Then User should see "Reading successfully recorded!"
+    Then User should see "Reading successfully recorded!" in track glucose form
 
   Examples:
     | TestCaseId	   | Scenario                |

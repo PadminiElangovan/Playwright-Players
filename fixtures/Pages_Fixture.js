@@ -5,7 +5,7 @@ import { PremiumUsrExercise_Page } from '../pages/PremiumUsrExercise_Page.js';
 import {OnboardingWithReport_Page} from '../pages/OnboardingWithReport_Page.js';
 import { TrackGlucosePremiumUser_Page } from '../pages/TrackGlucosePremiumUser_Page.js';  
 import {OndoardingWithReportSteps_Page} from '../pages/OndoardingWithReportSteps_Page.js';
-
+import { PhysicalActivityPremiumUser_page } from '../pages/PhysicalActivityPremiumUser_page.js'; 
 
 export const Pages_Fixture = {
   pages: async ({ page }, use, testInfo) => {
@@ -15,6 +15,7 @@ export const Pages_Fixture = {
     const pUsrExercise= new PremiumUsrExercise_Page(page);
     const onbrdwithreport = new OnboardingWithReport_Page(page);
     const trackGlucose = new TrackGlucosePremiumUser_Page(page);
+    const physicalActivity = new PhysicalActivityPremiumUser_page(page);
     const withsteps = new OndoardingWithReportSteps_Page(page, onbrdwithreport);
 
     const tags = (testInfo.tags || []).map(t => t.toLowerCase());
@@ -53,9 +54,8 @@ export const Pages_Fixture = {
       console.log("Skipping launch due to @skiplaunch — login will also be skipped");
        await page.goto('about:blank');
     }
-
-
-    await use({ login, diabeticrisk,onbrdwithreport, pUsrExercise, launch,withsteps });
+    
+    await use({ login, diabeticrisk,onbrdwithreport, pUsrExercise, launch, trackGlucose, physicalActivity, withsteps});
   },
 };
 
