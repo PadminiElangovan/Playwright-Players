@@ -1,4 +1,4 @@
-// Generated from: featureFiles\Launch\Launch.feature
+// Generated from: featureFiles/Launch/Launch.feature
 import { test } from "../../../fixtures/Index_Fixture.js";
 
 test.describe('Launch Page Validations', () => {
@@ -249,7 +249,7 @@ test.describe('Launch Page Validations', () => {
 
 test.use({
   $test: [({}, use) => use(test), { scope: 'test', box: true }],
-  $uri: [({}, use) => use('featureFiles\\Launch\\Launch.feature'), { scope: 'test', box: true }],
+  $uri: [({}, use) => use('featureFiles/Launch/Launch.feature'), { scope: 'test', box: true }],
   $bddFileData: [({}, use) => use(bddFileData), { scope: "test", box: true }],
 });
 

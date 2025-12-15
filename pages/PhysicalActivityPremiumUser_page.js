@@ -64,6 +64,7 @@ export class PhysicalActivityPremiumUser_page {
     }
 
     async physicalActivtySucessMesg() {
+          await this.sucessMessage.waitFor({ state: 'visible', timeout: 3000 });
         return await this.sucessMessage.textContent();
     }
 

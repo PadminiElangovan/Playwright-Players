@@ -1,4 +1,4 @@
-// Generated from: featureFiles\OnboardingWithReport\Onboardingwithbloodreport-Modal.feature
+// Generated from: featureFiles/OnboardingWithReport/Onboardingwithbloodreport-Modal.feature
 import { test } from "../../../fixtures/Index_Fixture.js";
 
 test.describe('Onboarding scenarios with blood report - Modal Total 15 Scenarios', () => {
@@ -115,7 +115,7 @@ test.describe('Onboarding scenarios with blood report - Modal Total 15 Scenarios
 
 test.use({
   $test: [({}, use) => use(test), { scope: 'test', box: true }],
-  $uri: [({}, use) => use('featureFiles\\OnboardingWithReport\\Onboardingwithbloodreport-Modal.feature'), { scope: 'test', box: true }],
+  $uri: [({}, use) => use('featureFiles/OnboardingWithReport/Onboardingwithbloodreport-Modal.feature'), { scope: 'test', box: true }],
   $bddFileData: [({}, use) => use(bddFileData), { scope: "test", box: true }],
 });
 
