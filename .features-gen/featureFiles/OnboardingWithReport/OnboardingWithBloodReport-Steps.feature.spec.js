@@ -1,4 +1,4 @@
-// Generated from: featureFiles\OnboardingWithReport\OnboardingWithBloodReport-Steps.feature
+// Generated from: featureFiles/OnboardingWithReport/OnboardingWithBloodReport-Steps.feature
 import { test } from "../../../fixtures/Index_Fixture.js";
 
 test.describe('Onboarding scenarios with blood report - Steps Total 45 Scenarios', () => {
@@ -341,7 +341,7 @@ test.beforeEach('BeforeEach Hooks', ({ $runScenarioHooks, excelHelpers, pages, t
 
 test.use({
   $test: [({}, use) => use(test), { scope: 'test', box: true }],
-  $uri: [({}, use) => use('featureFiles\\OnboardingWithReport\\OnboardingWithBloodReport-Steps.feature'), { scope: 'test', box: true }],
+  $uri: [({}, use) => use('featureFiles/OnboardingWithReport/OnboardingWithBloodReport-Steps.feature'), { scope: 'test', box: true }],
   $bddFileData: [({}, use) => use(bddFileData), { scope: "test", box: true }],
 });
 
