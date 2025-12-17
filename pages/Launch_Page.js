@@ -1,4 +1,3 @@
-// pages/Launch_Page.js
 export class Launch_Page {
   constructor(page) {
     this.page = page;

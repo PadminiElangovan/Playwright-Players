@@ -5,7 +5,7 @@ import { PremiumUsrExercise_Page } from '../pages/PremiumUsrExercise_Page.js';
 import {OnboardingWithReport_Page} from '../pages/OnboardingWithReport_Page.js';
 import { TrackGlucosePremiumUser_Page } from '../pages/TrackGlucosePremiumUser_Page.js';  
 import {OndoardingWithReportSteps_Page} from '../pages/OndoardingWithReportSteps_Page.js';
-
+import { CommonHome_Page } from '../pages/CommonHome_Page.js';
 
 export const Pages_Fixture = {
   pages: async ({ page }, use, testInfo) => {
@@ -16,6 +16,7 @@ export const Pages_Fixture = {
     const onbrdwithreport = new OnboardingWithReport_Page(page);
     const trackGlucose = new TrackGlucosePremiumUser_Page(page);
     const withsteps = new OndoardingWithReportSteps_Page(page, onbrdwithreport);
+    const commonhome = new CommonHome_Page(page);
 
     const tags = (testInfo.tags || []).map(t => t.toLowerCase());
     console.log("Scenario:", testInfo.title);
@@ -55,7 +56,7 @@ export const Pages_Fixture = {
     }
 
 
-    await use({ login, diabeticrisk,onbrdwithreport, pUsrExercise, launch,withsteps });
+    await use({ login, diabeticrisk,onbrdwithreport, pUsrExercise, launch, withsteps, commonhome });
   },
 };
 
