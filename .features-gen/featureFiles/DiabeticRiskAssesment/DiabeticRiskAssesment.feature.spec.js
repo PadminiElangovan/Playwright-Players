@@ -1,4 +1,4 @@
-// Generated from: featureFiles\DiabeticRiskAssesment\DiabeticRiskAssesment.feature
+// Generated from: featureFiles/DiabeticRiskAssesment/DiabeticRiskAssesment.feature
 import { test } from "../../../fixtures/Index_Fixture.js";
 
 test.describe('Verification of Diabetes Risk Analyzer', () => {
@@ -145,7 +145,7 @@ test.describe('Verification of Diabetes Risk Analyzer', () => {
 
 test.use({
   $test: [({}, use) => use(test), { scope: 'test', box: true }],
-  $uri: [({}, use) => use('featureFiles\\DiabeticRiskAssesment\\DiabeticRiskAssesment.feature'), { scope: 'test', box: true }],
+  $uri: [({}, use) => use('featureFiles/DiabeticRiskAssesment/DiabeticRiskAssesment.feature'), { scope: 'test', box: true }],
   $bddFileData: [({}, use) => use(bddFileData), { scope: "test", box: true }],
 });
 

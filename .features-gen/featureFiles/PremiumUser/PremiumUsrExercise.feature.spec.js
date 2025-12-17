@@ -1,4 +1,4 @@
-// Generated from: featureFiles\PremiumUser\PremiumUsrExercise.feature
+// Generated from: featureFiles/PremiumUser/PremiumUsrExercise.feature
 import { test } from "../../../fixtures/Index_Fixture.js";
 
 test.describe('Verification of Premium user Exercise Module', () => {
@@ -317,7 +317,7 @@ test.describe('Verification of Premium user Exercise Module', () => {
 
 test.use({
   $test: [({}, use) => use(test), { scope: 'test', box: true }],
-  $uri: [({}, use) => use('featureFiles\\PremiumUser\\PremiumUsrExercise.feature'), { scope: 'test', box: true }],
+  $uri: [({}, use) => use('featureFiles/PremiumUser/PremiumUsrExercise.feature'), { scope: 'test', box: true }],
   $bddFileData: [({}, use) => use(bddFileData), { scope: "test", box: true }],
 });
 
