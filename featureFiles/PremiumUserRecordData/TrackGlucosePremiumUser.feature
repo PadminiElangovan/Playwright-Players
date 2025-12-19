@@ -54,7 +54,7 @@ Scenario: Verify the four buttons below Reading Type
     | Bedtime   |
      
  @TrackGlucose @UIValidation 
- Scenario:  Verify the date picker option
+ Scenario: Verify the date picker option
   Then  User should see date picker 
    
  @TrackGlucose @UIValidation 
