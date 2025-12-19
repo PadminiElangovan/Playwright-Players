@@ -98,7 +98,7 @@ Feature: Validating physical activity functionality in the premium user record d
             | TC_PA_12   | HIIT with duration in hours              |
 
     @PhysicalActivity_13 @FunctionalValidation @negative
-    Scenario: Verify user is unable to enter <Scenario> duration value
+    Scenario Outline: Verify user is unable to enter <Scenario> duration value
 
         Given User is on the Physical Activity screen
         When User enters an "<Scenario>" value in the duration text field
