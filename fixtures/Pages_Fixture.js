@@ -7,6 +7,7 @@ import { TrackGlucosePremiumUser_Page } from '../pages/TrackGlucosePremiumUser_P
 import {OndoardingWithReportSteps_Page} from '../pages/OndoardingWithReportSteps_Page.js';
 import { PhysicalActivityPremiumUser_page } from '../pages/PhysicalActivityPremiumUser_page.js'; 
 import { FoodIntakePremiumUser_Page } from '../pages/FoodIntakePremiumUser_Page.js';
+import { CommonFeaturesDashboard_Page } from '../pages/CommonFeaturesDashboard_Page.js';
 
 export const Pages_Fixture = {
   pages: async ({ page }, use, testInfo) => {
@@ -19,6 +20,7 @@ export const Pages_Fixture = {
     const physicalActivity = new PhysicalActivityPremiumUser_page(page);
     const withsteps = new OndoardingWithReportSteps_Page(page, onbrdwithreport);
     const foodIntake = new FoodIntakePremiumUser_Page(page);
+    const commonDashboard = new CommonFeaturesDashboard_Page(page);
 
     const tags = (testInfo.tags || []).map(t => t.toLowerCase());
     console.log("Scenario:", testInfo.title);
@@ -57,7 +59,7 @@ export const Pages_Fixture = {
        await page.goto('about:blank');
     }
     
-    await use({ login, diabeticrisk,onbrdwithreport, pUsrExercise, launch, trackGlucose, physicalActivity, withsteps, foodIntake });
+    await use({ login, diabeticrisk,onbrdwithreport, pUsrExercise, launch, trackGlucose, physicalActivity, withsteps, foodIntake,commonDashboard });
   },
 };
 
