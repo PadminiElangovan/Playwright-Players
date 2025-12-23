@@ -5,7 +5,7 @@ Feature: Validating Track Glucose functionality in the premium user record data
   Given User is in Home Page
   When  User clicks Blood Glucose
 
- @newPremUser @skiplogin  @TrackGlucose @UIValidation 
+ @newPremUser @skiplogin  @TrackGlucose @UIValidation @eruma
  Scenario Outline: Verify <Scenario> in blood glucose form
   Then  User should see "<text>" Heading for "<Scenario>"
 
