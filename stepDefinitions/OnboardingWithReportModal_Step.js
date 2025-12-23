@@ -103,7 +103,7 @@ Then('User should see {string} section', async ({ pages }, expected) => {
 });
 
 //Module 3
-Given('User is on report analysis', async ({ pages }) => {
+Given('User is on report analysis and uploads the file', async ({ pages }) => {
     await pages.onbrdwithreport.uploadBloodReportBtn.waitFor({ state: 'visible' });
     await pages.onbrdwithreport.uploadBloodReportBtn.click();
     await pages.onbrdwithreport.uploadFile("Valid pdf file");

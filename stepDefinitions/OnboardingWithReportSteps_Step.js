@@ -22,16 +22,14 @@ Then('User should see {string} for {string} in steps', async ({ pages }, expecte
     switch (true) {
 
         case scenarioLower.includes('title'):
-            await expect(pages.withsteps.stepTitle).toHaveText(expected);
+            await expect(pages.withsteps.stepTitleWithReport).toHaveText(expected);
             const title = await pages.withsteps.getTitleText();
             console.log("Title --------> " + title);
-
             break;
         case scenarioLower.includes('subheading'):
-            await expect(pages.withsteps.stepSubTitle).toHaveText(expected);
+            await expect(pages.withsteps.stepSubTitleWithReport).toHaveText(expected);
             const subtitle = await pages.withsteps.getSubTitleText();
             console.log("Subtitle --------> " + subtitle);
-
             break;
 
     }
@@ -55,14 +53,13 @@ Then('User should see {string} for {string} in step {int}', async ({ pages }, ex
         await expect(pages.withsteps.stepNum).toHaveText(expected);
         console.log("Current stepNum -----> " + await pages.withsteps.getStepNum());
 
-    } else if (scenarioLower.includes("back button visibility")) {
-        await expect(pages.withsteps.backBtn).toBeVisible();
+    } else if (scenarioLower.includes(" button visibility")) {
 
-    } else if (scenarioLower.includes("Submit button visibility")) {
-        await expect(pages.withsteps.submitBtn).toBeVisible();
+       const button = pages.withsteps.getFieldByRole(expected);
+        await expect(button).toBeVisible();
 
     } else if (scenarioLower.includes("Checkbox for options")) {
-        const checkboxStep5 = ages.withsteps.verifyEachOptionHasCheckboxStep5();
+        const checkboxStep5 = pages.withsteps.verifyEachOptionHasCheckboxStep5();
         await expect(checkboxStep5).toBeVisible();
     }
 
@@ -99,20 +96,6 @@ Then('User should see {string} for {string} for step {int} fields', async ({ pag
 );
 
 
-
-
-// Then('User should see {string} for {string} for step {int} fields', async ({ pages, testData }, expected, scenario, arg2) => {
-//     switch (scenario) {
-//         case "alphabets in height field":
-//            await expect(pages.withsteps.heightError).toHaveText(testData.Expected);
-//             break;
-
-//         case "alphabets in weight field":
-//              await expect(pages.withsteps.weightError).toHaveText(testData.Expected);
-//             break;
-//     }
-// });
-
 Then('User should see options:', async ({ pages }, dataTable) => {
     const expectedOptions = dataTable.raw().flat();
     for (const option of expectedOptions) {
@@ -129,42 +112,42 @@ Given('User is in step2 of onboarding with report', async ({ pages, testData }) 
 });
 
 When('User clicks {string} from step {int}', async ({ pages }, option, stepNum) => {
-    await pages.onbrdwithreport.stepsModal.waitFor({ state: "visible" });
     await pages.withsteps.getFieldByText(option).click();
 
 });
 
 
 When('User clicks back button', async ({ pages }) => {
-    await pages.withsteps.backBtn.click();
+   await pages.withsteps.getFieldByRole("Back").click();
 });
 
-Given('User is in step3 of onboarding with report after selecting {string} in step2', async ({ pages, testData }, option) => {
+Given('User is in step3 of onboarding with report', async ({ pages, testData }) => {
     await pages.onbrdwithreport.stepsModal.waitFor({ state: "visible" });
     await pages.withsteps.enterValuesStep1(testData.Height, testData.Weight);
     await pages.onbrdwithreport.stepsModal.waitFor({ state: "visible" });
-    await pages.withsteps.getFieldByText(option).click();
+    await pages.withsteps.getFieldByText("Easy 🦋").click();
 
 });
 
-Given('User is in step4 of onboarding with report after selecting {string} in step2 and {string} in step3', async ({ pages, testData }, step2option, dietoption) => {
+Given('User is in step4 of onboarding with report', async ({ pages, testData }) => {
     await pages.onbrdwithreport.stepsModal.waitFor({ state: "visible" });
     await pages.withsteps.enterValuesStep1(testData.Height, testData.Weight);
     await pages.onbrdwithreport.stepsModal.waitFor({ state: "visible" });
-    await pages.withsteps.getFieldByText(step2option).click();
+    await pages.withsteps.getFieldByText("Easy 🦋").click();
     await pages.onbrdwithreport.stepsModal.waitFor({ state: "visible" });
-    await pages.withsteps.getFieldByText(dietoption).click();
+    await pages.withsteps.getFieldByText("All-inclusive diet 🍴🍖🍎").click();
 
 });
 
-Given('User is in step5 of onboarding with report after selecting {string} in step2 ,{string} in step3 , {string} in step4', async ({ pages, testData }, step2option, dietoption, cuisineoption) => {
-    await pages.onbrdwithreport.stepsModal.waitFor({ state: "visible" });
+Given('User is in step5 of onboarding with report', async ({ pages, testData }) => {
+  await pages.onbrdwithreport.stepsModal.waitFor({ state: "visible" });
     await pages.withsteps.enterValuesStep1(testData.Height, testData.Weight);
-    await pages.withsteps.getFieldByText(step2option).click();
     await pages.onbrdwithreport.stepsModal.waitFor({ state: "visible" });
-    await pages.withsteps.getFieldByText(dietoption).click();
+    await pages.withsteps.getFieldByText("Easy 🦋").click();
     await pages.onbrdwithreport.stepsModal.waitFor({ state: "visible" });
-    await pages.withsteps.getFieldByText(cuisineoption).click();
+    await pages.withsteps.getFieldByText("All-inclusive diet 🍴🍖🍎").click();
+    await pages.onbrdwithreport.stepsModal.waitFor({ state: "visible" });
+    await pages.withsteps.getFieldByText("Asian 🍜").click();
 
 });
 
@@ -173,7 +156,7 @@ When('User selects {string} and clicks submit from step {int}', async ({ pages }
     for (const allergy of allergies) {
         await pages.withsteps.selectAllergyCheckbox(allergy);
     }
-    await pages.withsteps.submitBtn.click();
+    await pages.withsteps.getFieldByRole("Submit").click();
 });
 
 Then('User should be navigated to free and premium details page', async ({ pages }) => {
