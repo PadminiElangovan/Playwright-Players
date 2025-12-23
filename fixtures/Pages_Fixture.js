@@ -18,13 +18,14 @@ export const Pages_Fixture = {
     const launch = new Launch_Page(page);
     const pUsrExercise = new PremiumUsrExercise_Page(page);
     const onbrdwithreport = new OnboardingWithReportModal_Page(page);
-    const trackGlucose = new TrackGlucosePremiumUser_Page(page);
     const physicalActivity = new PhysicalActivityPremiumUser_page(page);
     const withsteps = new OndoardingWithReportSteps_Page(page, onbrdwithreport);
     const foodIntake = new FoodIntakePremiumUser_Page(page);
     const commonDashboard = new CommonFeaturesDashboard_Page(page);
     const commonhome = new CommonHome_Page(page);
     const withoutsteps = new OnboardingWithoutReport_Page(page, login, onbrdwithreport, withsteps)
+    const trackGlucose = new TrackGlucosePremiumUser_Page(page, login, withoutsteps);
+    
 
     const tags = (testInfo.tags || []).map(t => t.toLowerCase());
     console.log("Scenario:", testInfo.title);
