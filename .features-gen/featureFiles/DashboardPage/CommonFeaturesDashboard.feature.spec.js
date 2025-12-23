@@ -1,4 +1,4 @@
-// Generated from: featureFiles/DashboardPage/CommonFeaturesDashboard.feature
+// Generated from: featureFiles\DashboardPage\CommonFeaturesDashboard.feature
 import { test } from "../../../fixtures/Index_Fixture.js";
 
 test.describe('Dashboard page validation for Registered Free account user', () => {
@@ -151,7 +151,7 @@ test.describe('Dashboard page validation for Registered Free account user', () =
 
 test.use({
   $test: [({}, use) => use(test), { scope: 'test', box: true }],
-  $uri: [({}, use) => use('featureFiles/DashboardPage/CommonFeaturesDashboard.feature'), { scope: 'test', box: true }],
+  $uri: [({}, use) => use('featureFiles\\DashboardPage\\CommonFeaturesDashboard.feature'), { scope: 'test', box: true }],
   $bddFileData: [({}, use) => use(bddFileData), { scope: "test", box: true }],
 });
 

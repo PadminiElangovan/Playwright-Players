@@ -736,6 +736,7 @@ Feature: Onboarding scenarios without blood report Total 132 Scenarios
 
     #-------------------------------------------------------------------------------------------------------------------
 
+
     @freeandpremiumpg @WithoutReport_132
     Scenario: Verify user navigated to free and premium details page from step 12
         Given User is in step12 of of onboarding without report

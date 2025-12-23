@@ -1,4 +1,4 @@
-// Generated from: featureFiles/PaymentSubscription/Payment.feature
+// Generated from: featureFiles\PaymentSubscription\Payment.feature
 import { test } from "../../../fixtures/Index_Fixture.js";
 
 test.describe('Upgrade to Premium Subscription', () => {
@@ -34,7 +34,7 @@ test.describe('Upgrade to Premium Subscription', () => {
 
 test.use({
   $test: [({}, use) => use(test), { scope: 'test', box: true }],
-  $uri: [({}, use) => use('featureFiles/PaymentSubscription/Payment.feature'), { scope: 'test', box: true }],
+  $uri: [({}, use) => use('featureFiles\\PaymentSubscription\\Payment.feature'), { scope: 'test', box: true }],
   $bddFileData: [({}, use) => use(bddFileData), { scope: "test", box: true }],
 });
 
