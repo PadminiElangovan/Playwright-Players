@@ -6,10 +6,12 @@ import { OnboardingWithReportModal_Page } from '../pages/OnboardingWithReportMod
 import { TrackGlucosePremiumUser_Page } from '../pages/TrackGlucosePremiumUser_Page.js';
 import { OndoardingWithReportSteps_Page } from '../pages/OndoardingWithReportSteps_Page.js';
 import { CommonHome_Page } from '../pages/CommonHome_Page.js';
-import { PhysicalActivityPremiumUser_page } from '../pages/PhysicalActivityPremiumUser_page.js';
+import { PhysicalActivityPremiumUser_page } from '../pages/PhysicalActivityPremiumUser_page.js'; 
+import { HomepageFreeuser_Page } from '../pages/HomepageFreeuser_Page.js';
 import { FoodIntakePremiumUser_Page } from '../pages/FoodIntakePremiumUser_Page.js';
 import { CommonFeaturesDashboard_Page } from '../pages/CommonFeaturesDashboard_Page.js';
 import { OnboardingWithoutReport_Page } from '../pages/OnboardingWithoutReport_Page.js';
+
 
 export const Pages_Fixture = {
   pages: async ({ page }, use, testInfo) => {
@@ -23,9 +25,9 @@ export const Pages_Fixture = {
     const foodIntake = new FoodIntakePremiumUser_Page(page);
     const commonDashboard = new CommonFeaturesDashboard_Page(page);
     const commonhome = new CommonHome_Page(page);
+    const homepagefreeuser = new HomepageFreeuser_Page(page);
     const withoutsteps = new OnboardingWithoutReport_Page(page, login, onbrdwithreport, withsteps)
-    const trackGlucose = new TrackGlucosePremiumUser_Page(page, login, withoutsteps);
-    
+    const trackGlucose = new TrackGlucosePremiumUser_Page(page, login, withoutsteps)
 
     const tags = (testInfo.tags || []).map(t => t.toLowerCase());
     console.log("Scenario:", testInfo.title);
@@ -64,7 +66,9 @@ export const Pages_Fixture = {
       await page.goto('about:blank');
     }
 
-    await use({ login, diabeticrisk, onbrdwithreport, pUsrExercise, launch, trackGlucose, physicalActivity, withsteps, commonhome, foodIntake, commonDashboard,withoutsteps });
+
+    await use({ login, diabeticrisk, onbrdwithreport, pUsrExercise, launch, trackGlucose, physicalActivity, withsteps, commonhome, foodIntake, commonDashboard,withoutsteps, homepagefreeuser });
+
 
   },
 };
