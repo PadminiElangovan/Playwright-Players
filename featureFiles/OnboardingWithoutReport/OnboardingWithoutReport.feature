@@ -9,7 +9,7 @@ Feature: Onboarding scenarios without blood report Total 132 Scenarios
     #Module 1:Onboarding Step 1 UI validation ---- Total 6 Scenario
     #-------------------------------------------------------------------------------------------------------------------
 
-    @titleswithoutreportstep1
+    @titleswithoutreportstep01
     Scenario Outline: Verify presence of <Scenario> without report step 1
         When User clicks on step for onboarding button in upload blood report page
         Then User should see "<Expected>" for "<Scenario>" in step without report
