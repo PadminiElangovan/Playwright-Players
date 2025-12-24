@@ -30,8 +30,9 @@ export const Pages_Fixture = {
     const stressManageDashboard = new StressManagementCommonDashboard_Page(page);
     const premiumAddDashboard = new PremiumAdditionalDashboard_Page(page);
     const homepagefreeuser = new HomepageFreeuser_Page(page);
-    const withoutsteps = new OnboardingWithoutReport_Page(page, login, onbrdwithreport, withsteps)
-    const trackGlucose = new TrackGlucosePremiumUser_Page(page, login, withoutsteps)
+    const withoutsteps = new OnboardingWithoutReport_Page(page);
+    const trackGlucose = new TrackGlucosePremiumUser_Page(page);
+
 
     const tags = (testInfo.tags || []).map(t => t.toLowerCase());
     console.log("Scenario:", testInfo.title);
@@ -72,8 +73,6 @@ export const Pages_Fixture = {
 
     
     await use({ login, diabeticrisk,onbrdwithreport, pUsrExercise, launch, trackGlucose, physicalActivity, withsteps, commonhome, foodIntake, commonDashboard, stressManageDashboard, premiumAddDashboard, withoutsteps, homepagefreeuser});
-
-
 
   },
 };
