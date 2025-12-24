@@ -1,4 +1,4 @@
-@sweet @login
+@sweet @login @ela
 Feature: Login Page Verification Total 31 scenarios
 
   #-------------------------------------------------------------------------------------------------------------------

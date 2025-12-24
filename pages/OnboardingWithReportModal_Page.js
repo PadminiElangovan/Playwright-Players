@@ -1,5 +1,5 @@
 import path from "path";
-export class OnboardingWithReport_Page {
+export class OnboardingWithReportModal_Page {
 
         constructor(page) {
                 this.page = page;
@@ -97,6 +97,7 @@ export class OnboardingWithReport_Page {
         getFieldByPlaceholder(placeholderText) {
                 return this.page.getByPlaceholder(placeholderText);
         }
+        
 
         getFieldByRole(roleText) {
                 return this.reportAnalysisModal
