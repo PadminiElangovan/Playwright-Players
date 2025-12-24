@@ -64,7 +64,7 @@ Feature: Home Page - Common Features for Registered User
 
     Examples:
       | condition |
-      | Obese     |
+      | Normal    |
       | Diabetic  |
 
   Scenario: Verify unit for Average Blood Sugar
