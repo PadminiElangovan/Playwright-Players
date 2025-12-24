@@ -1,4 +1,4 @@
-// Generated from: featureFiles/PremiumUserRecordData/PhysicalActivityPremiumUser.feature
+// Generated from: featureFiles\PremiumUserRecordData\PhysicalActivityPremiumUser.feature
 import { test } from "../../../fixtures/Index_Fixture.js";
 
 test.describe('Validating physical activity functionality in the premium user record data', () => {
@@ -184,7 +184,7 @@ test.describe('Validating physical activity functionality in the premium user re
 
 test.use({
   $test: [({}, use) => use(test), { scope: 'test', box: true }],
-  $uri: [({}, use) => use('featureFiles/PremiumUserRecordData/PhysicalActivityPremiumUser.feature'), { scope: 'test', box: true }],
+  $uri: [({}, use) => use('featureFiles\\PremiumUserRecordData\\PhysicalActivityPremiumUser.feature'), { scope: 'test', box: true }],
   $bddFileData: [({}, use) => use(bddFileData), { scope: "test", box: true }],
 });
 

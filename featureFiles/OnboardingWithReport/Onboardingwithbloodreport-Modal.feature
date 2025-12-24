@@ -1,4 +1,4 @@
-@sweet @withreportmodal @skiplogin
+@sweet @withreportmodal @skiplogin @ela
 Feature: Onboarding scenarios with blood report - Modal Total 16 Scenarios
 
     Background: User successfully completed profile setup
@@ -80,7 +80,7 @@ Feature: Onboarding scenarios with blood report - Modal Total 16 Scenarios
 
     @formvalidationstep1
     Scenario Outline: Verify <Scenario> in report analysis
-        Given User is on report analysis
+        Given User is on report analysis and uploads the file
         When User clicks Onboarding button
         Then User should see "<Expected>" for step for onboarding with Blood report for "<Scenario>"
 
