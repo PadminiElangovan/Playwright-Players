@@ -17,12 +17,21 @@ export class PremiumAdditionalDashboard_Page {
         this.highLabel = page.getByText('High', { exact: true });
         this.smartInsights = (element) => page.getByText(element, { exact: true });
         this.content = (title) => page.locator('div.border-l-4').filter({ has: page.getByText(title, { exact: true }) }).locator('p.text-xs');
-
+        this.cardTitle = (title) => page.locator(`span.text-sm.font-medium:has-text("${title}")`);
+        this.cardRoot = (title) => page.locator('div.rounded-lg', { has: page.locator('span', { hasText: title }) });
+        this.cardValue = (title) => this.cardRoot(title).locator('div.text-3xl.font-bold');
+        this.cardInnerText = (title) => this.cardRoot(title).locator('.text-xs.mt-2')
+        this.ManagePremiumMesg = page.getByText('Are you sure you want to');
+        this.lossOfFeaturesTitle = page.getByText('What you\'ll lose:•');
+        this.lossOfFeaturesList = page.locator("//ul[contains(@class,'space-y-2') and contains(@class,'text-amber-700')]");
+        this.lossOfFeaturesItem = (text) => this.lossOfFeaturesList.locator('li', { hasText: text });
+        this.PremiumButtons = (button) => page.getByRole('button', { name: button });
+        this.toastMesg = page.locator('div.text-sm.opacity-90')
+        this.closeIcon = page.getByRole('button', { name: 'Close' }).first();
 
     }
 
     async getPremiumActivatedStatus() {
-
         return await this.PremiumActivatedStatus.textContent();
     }
 
@@ -69,7 +78,6 @@ export class PremiumAdditionalDashboard_Page {
 
     async getMoodEmojis() {
         return await this.emojiContainer.allTextContents();
-
     }
 
     async selectMoodEmoji(emoji) {
@@ -79,13 +87,48 @@ export class PremiumAdditionalDashboard_Page {
 
     async clickLogEmotionButton() {
         await this.LogEmotionalStateButton.click();
-
     }
 
     async getSuccessMesg() {
         await this.successMesg.waitFor({ state: 'visible' });
         return await this.successMesg.textContent();
     }
+
+    async getCardTitle(title) {
+        await this.cardTitle(title).waitFor({ state: 'visible' });
+        return await this.cardTitle(title).textContent();
+    }
+
+    async getCardValue(title) {
+        await this.cardValue(title).waitFor({ state: 'visible' });
+        return await this.cardValue(title).textContent();
+    }
+
+    async getCardText(title) {
+        await this.cardInnerText(title).waitFor({ state: 'visible' });
+        return await this.cardInnerText(title).textContent();
+    }
+
+    async getManagePremiumMesgText() {
+        return await this.ManagePremiumMesg.textContent();
+    }
+
+    async getLossOfFeaturesTitle() {
+        return await this.lossOfFeaturesTitle.textContent();
+    }
+
+    async premiumMesgText() {
+        return await this.premiumMesg.textContent();
+    }
+
+    async clickDialogBoxButtons(button) {
+        await this.PremiumButtons(button).click();
+    }
+
+    async clickCloseIcon() {
+        await this.closeIcon.click();
+    }
+
 
 
 }

@@ -1,4 +1,4 @@
-@sweetBalance @DashboardPagePremium 
+@sweetBalance @DashboardPagePremium @dp
 Feature: Additional Dashboard page validation for Registered Premium account user
 
     Background: User is in Home Page after logged in
@@ -109,10 +109,109 @@ Feature: Additional Dashboard page validation for Registered Premium account use
             | Pattern Detected   |
             | Suggestion         |
 
-    @DashboardPage_Premium_13 @UIValidation 
+    @DashboardPage_Premium_13 @UIValidation
     Scenario: Verify Smart Insights titles content on Premium dashboard
         Then User should see the following "Content" under Smart Insights "Titles":
             | Titles             | Content                                                                                                                               |
             | Target Achievement | percentage of time the user was in the target range for the last 7 days with the percentage improvement compared to the previous week |
             | Pattern Detected   | percentage of glucose value spike with suggestion to improve                                                                          |
             | Suggestion         | suggestion of activity with the average expected glucose reduction from this activity                                                 |
+
+    #  -------------Activity Tracking section validation -----------------------------
+    @DashboardPage_Premium_14 @UIValidation
+    Scenario Outline: Verify dashboard card is displayed with <CardTitle> title
+        Then User should see the card titled "<CardTitle>"
+
+        Examples:
+            | CardTitle        |
+            | Weekly Checks    |
+            | Exercise Minutes |
+            | Med Adherence    |
+            | Carb Goals       |
+
+
+    @DashboardPage_Premium_15 @UIValidation
+    Scenario Outline: Verify dashboard card values for <Scenario> without any log entries
+        Then User should see the card value for "<Scenario>"
+
+        Examples:
+            | Scenario         |
+            | Weekly Checks    |
+            | Exercise Minutes |
+            | Med Adherence    |
+            | Carb Goals       |
+
+    #---------------------------premium dialog box validation-----------------------
+    @DashboardPage_Premium_16 @UIValidation
+    Scenario: Verify confirmation message displayed in Manage Premium dialog box
+        Given User is in dashboard Page
+        When User clicks the "Manage Premium" button in dashboard page
+        Then User should see the confirmation message:
+            """
+            Are you sure you want to cancel your premium subscription? You'll continue to have access to premium features until the end of your current billing period.
+            """
+
+    @DashboardPage_Premium_17 @UIValidation
+    Scenario: Verify loss of features title is displayed
+        Given User is in dashboard Page
+        When User clicks the "Manage Premium" button in dashboard page
+        Then User should see the section title "What you'll lose:"
+
+    @DashboardPage_Premium_18 @UIValidation
+    Scenario: Verify loss of features content is displayed
+        Given User is in dashboard Page
+        When User clicks the "Manage Premium" button in dashboard page
+        Then User should see the following loss of features
+            | Features                                                |
+            | • Personalized meal plans tailored to your health goals |
+            | • Advanced analytics and blood sugar insights           |
+            | • Specialized diabetes management plans                 |
+            | •  Priority support and premium features                |
+
+    @DashboardPage_Premium_19 @FunctionalValidation
+    Scenario: Verify action buttons are displayed in dialog box
+        Given User is in dashboard Page
+        When User clicks the "Manage Premium" button in dashboard page
+        Then User should see the following action buttons:
+            | Buttons        |
+            | Keep Premium   |
+            | Cancel Premium |
+
+    @DashboardPage_Premium_20 @FunctionalValidation
+    Scenario: Verify Keep Premium button functionality
+        Given User is in Manage premium dialog box
+        When User clicks the "Keep Premium" button
+        Then User should see success message "Your premium subscription will continue."
+
+
+    @DashboardPage_Premium_21 @FunctionalValidation
+    Scenario: Verify Cancel Premium button functionality
+        Given User is in Manage premium dialog box
+        When User clicks the "Cancel Premium" button
+        Then User should see success message "Your premium subscription has been cancelled but will remain active until the end date."
+
+    @DashboardPage_Premium_22 @FunctionalValidation
+    Scenario: Verify X button closes the dialog box
+        Given User is in Manage premium dialog box
+        When User clicks the close icon
+        Then User should see the Manage Premium dialog box closed
+
+    @DashboardPage_Premium_23 @UIValidation
+    Scenario Outline: Verify style and color of action buttons
+        Given User is in dashboard Page
+        When User clicks the "Manage Premium" button in dashboard page
+        Then User should see "<button>" button with background color "<background>" and text color "<textColor>"
+
+        Examples:
+            | button         | background         | textColor          |
+            | Keep Premium   | rgb(255, 255, 255) | rgb(2, 8, 23)      |
+            | Cancel Premium | rgb(239, 68, 68)   | rgb(255, 255, 255) |
+
+
+
+
+
+
+
+
+
