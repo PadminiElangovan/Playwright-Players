@@ -110,7 +110,6 @@ When('User moves the energy level slider to {string}', async ({ pages, testData 
 });
 
 Then('User should see the energy value change accordingly for {string}', async ({ pages, testData }, scenario) => {
-
     const before = parseInt(pages.beforeSliderValue, 10);
     const after = parseInt(await pages.premiumAddDashboard.getSliderValue(), 10);
     const steps = parseInt(testData.sliderValue, 10);
@@ -185,6 +184,102 @@ Then('User should see the following {string} under Smart Insights {string}:', as
                 throw new Error(`No validation defined for Smart Insight title: ${title}`);
         }
     }
+});
+
+Then('User should see the card titled {string}', async ({ pages }, title) => {
+    const cardLocator = pages.premiumAddDashboard.cardTitle(title);
+    await cardLocator.waitFor({ state: 'visible' });
+    const isVisible = await cardLocator.isVisible();
+    expect(isVisible).toBe(true);
+    const text = await cardLocator.textContent();
+    expect(text.trim()).toBe(title);
+});
+
+Then('User should see the card value for {string}', async ({ pages, testData }, title) => {
+
+    const actualValue = await pages.premiumAddDashboard.getCardValue(title);
+    const actualMsg = await pages.premiumAddDashboard.getCardText(title);
+    switch (title) {
+        case 'Med Adherence':
+            expect(actualValue).toBe(`${testData.cardValue}%`);
+            break;
+
+        case 'Exercise Minutes':
+            expect(actualValue).toBe(testData.cardValue);
+            break;
+
+        case 'Weekly Checks':
+            expect(actualValue).toBe(testData.cardValue);
+            break;
+
+        case 'Carb Goals':
+            expect(actualValue).toBe(testData.cardValue);
+            break;
+
+        default:
+            throw new Error(`Unhandled dashboard card title: ${title}`);
+    }
+    expect(actualMsg).toBe(testData.cardMesg);
+});
+
+Then('User should see the confirmation message:', async ({ pages }, docString) => {
+    const actualMesg = await pages.premiumAddDashboard.getManagePremiumMesgText();
+    await expect(actualMesg).toBe(docString);
+
+});
+
+Then('User should see the section title {string}', async ({ pages }, expectedTitle) => {
+    const actualTitle = await pages.premiumAddDashboard.getLossOfFeaturesTitle();
+    expect(actualTitle).toContain(expectedTitle);
+});
+
+Then('User should see the following loss of features', async ({ pages }, dataTable) => {
+    const rows = dataTable.hashes();
+
+    for (const row of rows) {
+        const featureLocator = pages.premiumAddDashboard.lossOfFeaturesItem(row.Features);
+        await expect(featureLocator).toBeVisible();
+        await expect(featureLocator).toHaveText(row.Features);
+    }
+});
+
+Then('User should see the following action buttons:', async ({ pages }, dataTable) => {
+     const rows = dataTable.hashes();
+
+     for(const row of rows){
+     await expect (pages.premiumAddDashboard.PremiumButtons(row['Buttons']) ).toBeVisible();   
+     }
+});
+
+Given('User is in Manage premium dialog box', async ({ pages }) => {
+  await pages.premiumAddDashboard.clickManagePremiumButton();
+
+});
+
+When('User clicks the {string} button', async ({ pages }, buttonName) => {
+   await pages.premiumAddDashboard.clickDialogBoxButtons(buttonName);
+});
+
+Then('User should see success message {string}', async ({ pages }, expectedMesg) => {
+  
+  await expect(pages.premiumAddDashboard.toastMesg).toHaveText(expectedMesg);
+});
+
+When('User clicks the close icon', async ({ pages }) => {
+    await pages.premiumAddDashboard.clickCloseIcon()
+});
+
+Then('User should see the Manage Premium dialog box closed', async ({ pages }) => {
+   await expect(pages.premiumAddDashboard.DialogBox).not.toBeVisible();
+});
+
+Then('User should see {string} button with background color {string} and text color {string}', async ({ pages }, buttonText, background, textColor) => {
+  const button = await pages.premiumAddDashboard.PremiumButtons(buttonText);
+  const bgColor = await button.evaluate(el => window.getComputedStyle(el).backgroundColor);
+  const Color = await button.evaluate(el => window.getComputedStyle(el).color);
+   expect(bgColor).toBe(background);
+   expect(Color).toBe(textColor);
+
 });
 
 

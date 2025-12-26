@@ -1,4 +1,4 @@
-// Generated from: featureFiles\CommonHome\CommonHome.feature
+// Generated from: featureFiles/CommonHome/CommonHome.feature
 import { test } from "../../../fixtures/Index_Fixture.js";
 
 test.describe('Home Page - Common Features for Registered User', () => {
@@ -453,7 +453,7 @@ test.describe('Home Page - Common Features for Registered User', () => {
 
 test.use({
   $test: [({}, use) => use(test), { scope: 'test', box: true }],
-  $uri: [({}, use) => use('featureFiles\\CommonHome\\CommonHome.feature'), { scope: 'test', box: true }],
+  $uri: [({}, use) => use('featureFiles/CommonHome/CommonHome.feature'), { scope: 'test', box: true }],
   $bddFileData: [({}, use) => use(bddFileData), { scope: "test", box: true }],
 });
 
